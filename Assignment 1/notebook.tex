@@ -1,0 +1,655 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Q2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{question-2}{%
+\section{Question 2}\label{question-2}}
+
+Kyle Robinson
+
+\#20540871
+
+Dr.~Edith Law
+
+CS680
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{scipy} \PY{k}{as} \PY{n+nn}{sp}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}data\PYZus{}folds gathers all of the data fro, the seperate files for concatination}
+        \PY{n}{data\PYZus{}folds} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}Each data and label file is combined into one dataframe per fold}
+        \PY{c+c1}{\PYZsh{}The labels are added as a new column titled \PYZsq{}label\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}The fold is added as a new column titled \PYZsq{}fold\PYZsq{}}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{n}{labels} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{knn\PYZhy{}dataset/labels}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n}{data\PYZus{}folds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{knn\PYZhy{}dataset/data}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{)}
+            \PY{n}{data\PYZus{}folds}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{data\PYZus{}folds}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{labels}\PY{p}{)}
+            \PY{n}{data\PYZus{}folds}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}
+        
+        \PY{c+c1}{\PYZsh{}The individual data\PYZus{}folds dataframes are combined into one called \PYZsq{}data\PYZsq{}}
+        \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{data\PYZus{}folds}\PY{p}{,} \PY{n}{ignore\PYZus{}index} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Set a random seed to maintain uniform results each run (Because it\PYZsq{}s an assignment)}
+        \PY{c+c1}{\PYZsh{}4 because it\PYZsq{}s my favourite number}
+        \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+        
+        \PY{n}{data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}        0   1   2   3   4   5   6   7   8   9  {\ldots}   56  57  58  59  60  61  \textbackslash{}
+        0      0   0  11   0  16   0   0   0   4   0  {\ldots}    0   0   0   0   3   5   
+        1      0   0   9  16  16  16   0   0   0   0  {\ldots}    3   0  15  13  10   3   
+        2      9  16  15  10  16  16   0   0  16  13  {\ldots}    0  16  16   7  16  16   
+        3      0   0   0   6   0   1   0   0   0   0  {\ldots}    0   0   0   0   2   0   
+        4      0   5   0  14  16   0   0   0   0   0  {\ldots}    0   3   0   9   0   8   
+        5      0   0   0  12  12   1   0   0   0   4  {\ldots}    0   0   0  13  16  15   
+        6      0   0   0  10   0   0   0  11   9   0  {\ldots}    0   0   4   5  13  15   
+        7     10   3  15  16   6  13  15  16  13  16  {\ldots}    0  16  15  16  16  16   
+        8     14   9  16  16  16  13  16   5  15  15  {\ldots}   14  12  16  16  16   8   
+        9     16  13  16  16  16  12  11   7   5  16  {\ldots}   10  15  10  16  16  16   
+        10     0  15  16  10  16   7   7   8  10  11  {\ldots}    4  10   7  13  14  16   
+        11    16  15  16  16  16  16   6  14  16  15  {\ldots}    7  16  16  16  16  16   
+        12     5   0   0   7   4   1   0   0   0  10  {\ldots}    2   0   2   3   9   0   
+        13     0   1   1  10  16   0  11   0   9   0  {\ldots}    0   4   0   8  12  16   
+        14     0   0   0  11   0   0   0   0   0   0  {\ldots}    0   0   0   0  13   0   
+        15     0  16   7  16  16   6  16   7   0   0  {\ldots}   12   0   3  16  11  16   
+        16     0   0   0   2   6   0   0   0   0   0  {\ldots}    0   0   0   7   7  11   
+        17     0   0   0   0  14   3   0   0   0   0  {\ldots}    0   0   1   3   0   0   
+        18     0   0   8   8  11   1   0   0   0   0  {\ldots}    0   0   2  10   0   0   
+        19     0   0   5   0   6   8   0   0   0   0  {\ldots}    0   0   0   3   0   0   
+        20     0   2  16  16  16  16   8   7   0  16  {\ldots}    7  15  16  16  16   8   
+        21    15  16  16  16  16  16  14  16   0  16  {\ldots}   16  14  16  16  16  16   
+        22     2   1   5  16  11   0   0  16   3   0  {\ldots}    0  12   9   8  16   5   
+        23     0  14   9  10  16  16   6   5   8  13  {\ldots}    8   0   9  16   0  12   
+        24     0   0   0   0  10   0   0   0   0   0  {\ldots}    0   0   0   0   0   3   
+        25    10  15   6  10  16  13  13   8  12   3  {\ldots}    0  10   8  11  16  16   
+        26     0   0  15  14   2   0   0   1   0   2  {\ldots}    4   0  14   5  13   2   
+        27     2   2  16  16   7  16  12  12  15  15  {\ldots}    0  14  16  16  16  16   
+        28     0   0   0   0   1   2   0   0   0   0  {\ldots}    0   0   2   8   0   0   
+        29     0   3  16  16  16  16   0   0   0   3  {\ldots}    0   7  12   6  12   8   
+        {\ldots}   ..  ..  ..  ..  ..  ..  ..  ..  ..  ..  {\ldots}   ..  ..  ..  ..  ..  ..   
+        1080  13  11  16  16  16   6  16   0  14   7  {\ldots}    4  16   9   6  11   0   
+        1081   0   0   0   0   0   0   0   0   0   0  {\ldots}    0   0   0   5   0   0   
+        1082   1  12   0  16   0   7   0   5  14  14  {\ldots}    8   4   6   7   9  16   
+        1083   0   0  16   8  12  16  16   0   0   4  {\ldots}    0   1  16  11  13   0   
+        1084   0   0   0   0   0   4   0   0   0   0  {\ldots}    0   0   5   1   5   7   
+        1085  10  16  16  16  16  16  16  15  16   9  {\ldots}   16  16  16  15  13  16   
+        1086   0   1   0   9  16   7   3   5   1  10  {\ldots}    7  16   4  16  16  13   
+        1087   1   0   2   0  15   0   0   0   8   1  {\ldots}    0   8   0   0   3   0   
+        1088  15  16  16  13  16   1  16  16  15   5  {\ldots}    6   9  14   7  16  16   
+        1089   0   0   0   0   2   0   0   1   0   0  {\ldots}    0   0   0   0   0   0   
+        1090   0   0   0   0  16   0   0   0   0   0  {\ldots}    0   0   0   2   0   0   
+        1091   0   0   9  16  16   5   0   0   0   1  {\ldots}    0   0   8   5   0   0   
+        1092   0  14   7  16   0   1   5  14   8   0  {\ldots}    0   0   9  10  14  16   
+        1093  10  16  16  16  16  10  16  16  16  16  {\ldots}   16  10  16  16  16  16   
+        1094   0   0   0   0   1   0   0   0   0   0  {\ldots}    0   0   0   0   0   0   
+        1095   0   0   0   0   0   0   0   0   0   0  {\ldots}    0   0   0   0   0   0   
+        1096   7   0   1   5   7   0  16   9   0   0  {\ldots}    3   5   9   7  11   0   
+        1097   0   0   4   2   0   0   0   0   0   0  {\ldots}    0   0   0   4   7   0   
+        1098   0   0   0   0   3   3   0   0   0   0  {\ldots}    0   0   0   5   0   0   
+        1099   0   0   0   1   0   0   0   0   0   0  {\ldots}    0   0   0   7   8   7   
+        1100   0   5   6  10   7   0   0   2   2   0  {\ldots}   10   0   4  10   7  11   
+        1101   0   6   8  16  16   2   0   0  11   0  {\ldots}   11   8   0  13  11  16   
+        1102   0   0   0  13   1   0   0   0   0   0  {\ldots}    0   0   0  14   1  11   
+        1103   5   8   0   9  16   3   7  10   7   0  {\ldots}    4   3   2  16  16  16   
+        1104  16  15  16  16  16  16  16  16  16  16  {\ldots}   16  16  16  16  16  14   
+        1105   0   0   0   4   0   0   0   0   0   0  {\ldots}    0   0   0   0   1   6   
+        1106   0   0   0   8   2  12   0   0   7   0  {\ldots}    0   0   5  10   6   5   
+        1107  16  14  16  16  16  16   7  16   0  16  {\ldots}   16   9  16  16  16  10   
+        1108   0   0   0   0  10   0   0   0   0   0  {\ldots}    0   0   0   0   0   0   
+        1109   5   0  16  16   8  14  11   0  13  11  {\ldots}   11  12  16  16  16  16   
+        
+              62  63  label  fold  
+        0      0   0      6     1  
+        1      0  16      5     1  
+        2     16   3      6     1  
+        3      0   0      5     1  
+        4      0   0      6     1  
+        5     15   0      6     1  
+        6     14   0      6     1  
+        7     16  11      6     1  
+        8     15  12      5     1  
+        9     10  16      6     1  
+        10    10  12      6     1  
+        11    11  16      5     1  
+        12     0   0      5     1  
+        13     9   7      6     1  
+        14     0   0      6     1  
+        15     4   0      6     1  
+        16     0   0      6     1  
+        17     0   0      5     1  
+        18     0   0      5     1  
+        19     0   0      5     1  
+        20     9  16      6     1  
+        21    14  16      6     1  
+        22     0   0      6     1  
+        23     9  13      5     1  
+        24     0   0      6     1  
+        25    16  11      6     1  
+        26     0  13      6     1  
+        27    16   4      5     1  
+        28     0   0      5     1  
+        29     3   9      5     1  
+        {\ldots}   ..  ..    {\ldots}   {\ldots}  
+        1080   0  12      5    10  
+        1081   0   0      6    10  
+        1082  14   3      6    10  
+        1083   1   0      5    10  
+        1084   1   0      6    10  
+        1085  16  16      6    10  
+        1086  16  10      6    10  
+        1087   0   0      5    10  
+        1088  16  16      6    10  
+        1089   0   0      6    10  
+        1090   0   0      5    10  
+        1091   0   0      5    10  
+        1092   5   7      6    10  
+        1093  16  16      6    10  
+        1094   0   0      5    10  
+        1095   0   0      5    10  
+        1096   2   4      6    10  
+        1097   3   3      6    10  
+        1098   0   0      5    10  
+        1099   3   0      6    10  
+        1100   5   0      6    10  
+        1101   0   1      6    10  
+        1102   0   0      6    10  
+        1103  16   5      6    10  
+        1104  14  16      5    10  
+        1105   0   0      6    10  
+        1106   0   0      5    10  
+        1107   9  16      5    10  
+        1108   0   0      6    10  
+        1109  15   8      6    10  
+        
+        [1110 rows x 66 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} https://en.wikipedia.org/wiki/Euclidean\PYZus{}distance}
+        \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{k}{def} \PY{n+nf}{knn\PYZus{}predict}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{point}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Tests a single multi\PYZhy{}dimensional data point against labeled data. The test}
+        \PY{l+s+sd}{    dataframe should contain a column with actual labels named \PYZsq{}label\PYZsq{}}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    test\PYZus{}data: pandas dataframe containing n\PYZhy{}columns of numerical attributes}
+        \PY{l+s+sd}{    point: pandas series containing n\PYZhy{}columns of numerical attributes}
+        \PY{l+s+sd}{    k: number of neighbors to test against}
+        \PY{l+s+sd}{    n: number of attributes (must be the first columns in dataframe)}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns a pandas Series of classifications for each value \PYZlt{}=k\PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{c+c1}{\PYZsh{}Reset the data index in case data is from the same dataframe}
+            \PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}Subtract and aquare the point\PYZsq{}s attributes from the test\PYZus{}data attributes}
+            \PY{c+c1}{\PYZsh{}Replaces the test\PYZus{}data attribute values with the results}
+            \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{n}{n}\PY{p}{]}\PY{p}{:}
+                \PY{n}{test\PYZus{}data}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{point}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{test\PYZus{}data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+            
+            \PY{c+c1}{\PYZsh{}Apply a sum function row\PYZhy{}wise and square the result}
+            \PY{c+c1}{\PYZsh{}Create a new column called \PYZsq{}dist\PYZsq{} where euclidean distance is stored}
+            \PY{n}{test\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{row}\PY{p}{:} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{row}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}Sort the dataframe by distance (lowest first)}
+            \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}For each value \PYZlt{}=k calculate the mode of the labels}
+            \PY{c+c1}{\PYZsh{}Store the mode for each assosiated k in an array titled\PYZsq{}labels\PYZsq{}}
+            \PY{c+c1}{\PYZsh{}In the event of a tie select the mode randomly}
+            \PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                \PY{n}{mode} \PY{o}{=} \PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mode}\PY{p}{(}\PY{p}{)}
+                \PY{k}{if} \PY{n}{mode}\PY{o}{.}\PY{n}{size} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{labels}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mode}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                    \PY{k}{global} \PY{n}{count}
+                    \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{labels}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mode}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                    
+            \PY{c+c1}{\PYZsh{}Return a pandas Series of classifications for each value \PYZlt{}=k}
+            \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{labels}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{knn}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{test}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Tests a data set using KNN under given parameters.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    train: pandas dataframe with labels in a \PYZsq{}label\PYZsq{} column and n attribute columns}
+        \PY{l+s+sd}{    test: pandas dataframe with n\PYZhy{}attribute columns (must be first)}
+        \PY{l+s+sd}{    k: number of neighbors to test against}
+        \PY{l+s+sd}{    n: number of attributes (must be the first columns in dataframe)}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns a pandas dataframe of classifications for values \PYZlt{}=k (maintains label columns)\PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{c+c1}{\PYZsh{}For all values \PYZlt{}=k create a new column named \PYZsq{}k\PYZus{}\PYZsh{}\PYZsq{} where \PYZsh{} is the k\PYZhy{}value}
+            \PY{n}{column\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                \PY{n}{column\PYZus{}names}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                
+            \PY{c+c1}{\PYZsh{}Apply the knn\PYZus{}predict function to each point in the test dataframe}
+            \PY{c+c1}{\PYZsh{}Store results in the associated \PYZsq{}k\PYZus{}\PYZsh{}\PYZsq{} column for each point in the test dataframe}
+            \PY{n}{test}\PY{p}{[}\PY{n}{column\PYZus{}names}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{row}\PY{p}{:} \PY{n}{knn\PYZus{}predict}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{row}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{column\PYZus{}names}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}Return dataframe of \PYZsq{}k\PYZus{}\PYZsh{}\PYZsq{} results, and label columns}
+            \PY{k}{return} \PY{n}{test}\PY{p}{[}\PY{n}{column\PYZus{}names}\PY{p}{]}
+        
+        
+        \PY{k}{def} \PY{n+nf}{knn\PYZus{}10\PYZus{}fold}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Compute the accuracy of KNN accross difference values \PYZlt{}=k (\PYZsh{} of neighbors not folds)}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    data: pandas dataframe with labels in a \PYZsq{}label\PYZsq{} column, folds in the \PYZsq{}fold column and n attribute columns}
+        \PY{l+s+sd}{    k: number of neighbors to test against}
+        \PY{l+s+sd}{    n: number of attributes (must be the first columns in dataframe)}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns pandas series of associated accuracies for values \PYZlt{}=k\PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{c+c1}{\PYZsh{}The knn function is run by finding each fold and testing against all others}
+            \PY{c+c1}{\PYZsh{}The results of each folds testing are stored in the \PYZsq{}folds\PYZsq{} array as pandas dataframes}
+            \PY{n}{folds} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                \PY{n}{folds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{knn}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{!=}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{k}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}Combine knn results from all folds into one dataframe}
+            \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{folds}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{verify\PYZus{}labels}\PY{p}{(}\PY{n}{row}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Given a row return a row with 1\PYZsq{}s and 0\PYZsq{}s after comparing against label}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        row: pandas series of calssifications for values \PYZlt{}=k}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        Return pandas series with binary values for correct/incorrect classifications\PYZdq{}\PYZdq{}\PYZdq{}}
+                
+                \PY{c+c1}{\PYZsh{}Store the correct label for each row}
+                \PY{n}{correct\PYZus{}label} \PY{o}{=} \PY{n}{row}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+                
+                \PY{c+c1}{\PYZsh{}Modify each column to a 1 or 0 based on comparison against correct\PYZus{}label}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{row}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{n}{correct\PYZus{}label}\PY{p}{:}
+                        \PY{n}{row}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{row}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                
+                \PY{c+c1}{\PYZsh{}Return a pandas series of classification results for values \PYZlt{}=k}
+                \PY{k}{return} \PY{n}{row}
+            
+            \PY{c+c1}{\PYZsh{}Apply the verify labels function row\PYZhy{}wise}
+            \PY{n}{data}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{verify\PYZus{}labels}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}Drop the label column as it\PYZsq{}s no longer needed}
+            \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{get\PYZus{}means}\PY{p}{(}\PY{n}{column}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Get the means of all columns.}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        column: pandas series}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        Returns the mean of the pandas series\PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{k}{return} \PY{n}{column}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}Apply the get\PYZus{}means function column\PYZhy{}wise and store the results (pandas series) in \PYZsq{}performance\PYZsq{}}
+            \PY{n}{performance} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}means}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}Return the pandas series containing performance results}
+            \PY{k}{return} \PY{n}{performance}
+        
+        \PY{c+c1}{\PYZsh{}Run the 10\PYZhy{}fold KNN validation on the data}
+        \PY{n}{results} \PY{o}{=} \PY{n}{knn\PYZus{}10\PYZus{}fold}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Plot the results}
+        \PY{n}{plot} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KNN Performance over varied k\PYZhy{}values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K\PYZhy{}values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Display plot in Jupyter}
+        \PY{n}{plot}
+        
+        \PY{c+c1}{\PYZsh{}Print results}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{results}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Minimum k\PYZhy{}value:}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+k\_1     0.738739
+k\_2     0.723423
+k\_3     0.789189
+k\_4     0.779279
+k\_5     0.786486
+k\_6     0.772973
+k\_7     0.807207
+k\_8     0.796396
+k\_9     0.802703
+k\_10    0.801802
+k\_11    0.805405
+k\_12    0.798198
+k\_13    0.800901
+k\_14    0.800901
+k\_15    0.807207
+k\_16    0.795495
+k\_17    0.802703
+k\_18    0.809009
+k\_19    0.808108
+k\_20    0.815315
+k\_21    0.812613
+k\_22    0.805405
+k\_23    0.818919
+k\_24    0.810811
+k\_25    0.811712
+k\_26    0.814414
+k\_27    0.815315
+k\_28    0.808108
+k\_29    0.810811
+k\_30    0.809910
+dtype: float64
+Minimum k-value:k\_23
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}fig = plot.get\PYZus{}figure()}
+        \PY{c+c1}{\PYZsh{}fig.savefig(\PYZdq{}Q2\PYZus{}graph.pdf\PYZdq{})}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

@@ -1,0 +1,4 @@
+numpy==1.13.3+mkl
+pandas==0.20.3
+scipy==0.19.1
+sklearn==0.0
