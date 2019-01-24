@@ -148,16 +148,16 @@ dt_clf = dt_clf.fit(train_data.loc[:,attributes], train_data.label)
 
 #Display a visual representation of the tree
 #https://scikit-learn.org/stable/modules/tree.html#classification
-import graphviz
-dot_data = tree.export_graphviz(dt_clf, out_file=None, 
-                                feature_names=attributes,  
-                                class_names=["B","M"],  
-                                filled=True, rounded=True,  
-                                special_characters=True,
-                                ) 
-graph = graphviz.Source(dot_data) 
-graph.render('Q4_tree')
-graph
+#import graphviz
+#dot_data = tree.export_graphviz(dt_clf, out_file=None, 
+#                                feature_names=attributes,  
+#                                class_names=["B","M"],  
+#                                filled=True, rounded=True,  
+#                                special_characters=True,
+#                                ) 
+#graph = graphviz.Source(dot_data) 
+#graph.render('Q4_tree')
+#graph
 
 
 # ## KNN
