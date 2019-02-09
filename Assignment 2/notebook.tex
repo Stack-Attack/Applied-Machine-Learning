@@ -1,0 +1,1370 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Q2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{question-4.2}{%
+\section{Question 4.2}\label{question-4.2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{scipy} \PY{k}{as} \PY{n+nn}{sp}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{shuffle}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
+        \PY{k+kn}{from} \PY{n+nn}{random} \PY{k}{import} \PY{n}{randint}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}\PY{p}{,} \PY{n}{cross\PYZus{}validate}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}predict}\PY{p}{,} \PY{n}{GridSearchCV}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}\PY{p}{,} \PY{n}{classification\PYZus{}report}
+        \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{OrderedDict}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}Headers sets names for all of the attributes contained in the data set}
+        \PY{n}{headers} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a10}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a11}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a12}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a13}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a14}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a15}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a16}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a17}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a18}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a19}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a20}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a21}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a22}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a23}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a24}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a25}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a26}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a27}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a28}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a29}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a30}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a31}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a32}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a33}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a34}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                        
+        \PY{c+c1}{\PYZsh{}Data is read into pandas dataframes while being shuffled using a seed of 4 (because I like 4)}
+        \PY{c+c1}{\PYZsh{}data = shuffle(pd.read\PYZus{}csv(\PYZdq{}ionosphere.csv\PYZdq{}, names = headers), random\PYZus{}state=4)}
+        \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ionosphere.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{names} \PY{o}{=} \PY{n}{headers}\PY{p}{)}
+        \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{binarize}\PY{p}{(}\PY{n}{val}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{val} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{1}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{0}
+        
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{binarize}\PY{p}{)}
+        
+        \PY{n}{data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}      a1  a2       a3       a4       a5       a6       a7       a8       a9  \textbackslash{}
+        0     1   0  0.99539 -0.05889  0.85243  0.02306  0.83398 -0.37708  1.00000   
+        1     1   0  1.00000 -0.18829  0.93035 -0.36156 -0.10868 -0.93597  1.00000   
+        2     1   0  1.00000 -0.03365  1.00000  0.00485  1.00000 -0.12062  0.88965   
+        3     1   0  1.00000 -0.45161  1.00000  1.00000  0.71216 -1.00000  0.00000   
+        4     1   0  1.00000 -0.02401  0.94140  0.06531  0.92106 -0.23255  0.77152   
+        5     1   0  0.02337 -0.00592 -0.09924 -0.11949 -0.00763 -0.11824  0.14706   
+        6     1   0  0.97588 -0.10602  0.94601 -0.20800  0.92806 -0.28350  0.85996   
+        7     0   0  0.00000  0.00000  0.00000  0.00000  1.00000 -1.00000  0.00000   
+        8     1   0  0.96355 -0.07198  1.00000 -0.14333  1.00000 -0.21313  1.00000   
+        9     1   0 -0.01864 -0.08459  0.00000  0.00000  0.00000  0.00000  0.11470   
+        10    1   0  1.00000  0.06655  1.00000 -0.18388  1.00000 -0.27320  1.00000   
+        11    1   0  1.00000 -0.54210  1.00000 -1.00000  1.00000 -1.00000  1.00000   
+        12    1   0  1.00000 -0.16316  1.00000 -0.10169  0.99999 -0.15197  1.00000   
+        13    1   0  1.00000 -0.86701  1.00000  0.22280  0.85492 -0.39896  1.00000   
+        14    1   0  1.00000  0.07380  1.00000  0.03420  1.00000 -0.05563  1.00000   
+        15    1   0  0.50932 -0.93996  1.00000  0.26708 -0.03520 -1.00000  1.00000   
+        16    1   0  0.99645  0.06468  1.00000 -0.01236  0.97811  0.02498  0.96112   
+        17    0   0  0.00000  0.00000 -1.00000 -1.00000  1.00000  1.00000 -1.00000   
+        18    1   0  0.67065  0.02528  0.66626  0.05031  0.57197  0.18761  0.08776   
+        19    0   0  1.00000 -1.00000  0.00000  0.00000  0.00000  0.00000  1.00000   
+        20    1   0  1.00000 -0.00612  1.00000 -0.09834  1.00000 -0.07649  1.00000   
+        21    0   0  1.00000  1.00000  0.00000  0.00000  0.00000  0.00000 -1.00000   
+        22    1   0  0.96071  0.07088  1.00000  0.04296  1.00000  0.09313  0.90169   
+        23    0   0 -1.00000  1.00000  0.00000  0.00000  0.00000  0.00000 -1.00000   
+        24    1   0  1.00000 -0.06182  1.00000  0.02942  1.00000 -0.05131  1.00000   
+        25    1   0  1.00000  0.57820  1.00000 -1.00000  1.00000 -1.00000  1.00000   
+        26    1   0  1.00000 -0.08714  1.00000 -0.17263  0.86635 -0.81779  0.94817   
+        27    0   0 -1.00000 -1.00000  0.00000  0.00000 -1.00000  1.00000  1.00000   
+        28    1   0  1.00000  0.08380  1.00000  0.17387  1.00000 -0.13308  0.98172   
+        29    0   0 -1.00000 -1.00000  1.00000  1.00000  1.00000 -1.00000 -1.00000   
+        ..   ..  ..      {\ldots}      {\ldots}      {\ldots}      {\ldots}      {\ldots}      {\ldots}      {\ldots}   
+        321   1   0  0.89505 -0.03168  0.87525  0.05545  0.89505  0.01386  0.92871   
+        322   1   0  0.90071  0.01773  1.00000 -0.01773  0.90071  0.00709  0.84752   
+        323   1   0  0.39394 -0.24242  0.62655  0.01270  0.45455  0.09091  0.63636   
+        324   1   0  0.86689  0.35950  0.72014  0.66667  0.37201  0.83049  0.08646   
+        325   1   0  0.89563  0.37917  0.67311  0.69438  0.35916  0.88696 -0.04193   
+        326   1   0  0.90547  0.41113  0.65354  0.74761  0.29921  0.95905 -0.13342   
+        327   1   0  1.00000  1.00000  0.36700  0.06158  0.12993  0.92713 -0.27586   
+        328   1   0  1.00000  0.51515  0.45455  0.33333  0.06061  0.36364 -0.32104   
+        329   1   0  0.88110  0.00000  0.94817 -0.02744  0.93598 -0.01220  0.90244   
+        330   1   0  0.82624  0.08156  0.79078 -0.08156  0.90426 -0.01773  0.92908   
+        331   1   0  0.74468  0.10638  0.88706  0.00982  0.88542  0.01471  0.87234   
+        332   1   0  0.87578  0.03727  0.89951  0.00343  0.89210  0.00510  0.86335   
+        333   1   0  0.97513  0.00710  0.98579  0.01954  1.00000  0.01954  0.99290   
+        334   1   0  1.00000  0.01105  1.00000  0.01105  1.00000  0.02320  0.99448   
+        335   1   0  1.00000 -0.01342  1.00000  0.01566  1.00000 -0.00224  1.00000   
+        336   1   0  0.88420  0.36724  0.67123  0.67382  0.39613  0.86399  0.02424   
+        337   1   0  0.90147  0.41786  0.64131  0.75725  0.30440  0.95148 -0.20449   
+        338   1   0  0.32789  0.11042  0.15970  0.29308  0.14020  0.74485 -0.25131   
+        339   1   0  0.65845  0.43617  0.44681  0.74804  0.05319  0.85106 -0.32027   
+        340   1   0  0.19466  0.05725  0.04198  0.25191 -0.10557  0.48866 -0.18321   
+        341   1   0  0.98002  0.00075  1.00000  0.00000  0.98982 -0.00075  0.94721   
+        342   1   0  0.82254 -0.07572  0.80462  0.00231  0.87514 -0.01214  0.86821   
+        343   1   0  0.35346 -0.13768  0.69387 -0.02423  0.68195 -0.03574  0.55717   
+        344   1   0  0.76046  0.01092  0.86335  0.00258  0.85821  0.00384  0.79988   
+        345   1   0  0.66667 -0.01366  0.97404  0.06831  0.49590  0.50137  0.75683   
+        346   1   0  0.83508  0.08298  0.73739 -0.14706  0.84349 -0.05567  0.90441   
+        347   1   0  0.95113  0.00419  0.95183 -0.02723  0.93438 -0.01920  0.94590   
+        348   1   0  0.94701 -0.00034  0.93207 -0.03227  0.95177 -0.03431  0.95584   
+        349   1   0  0.90608 -0.01657  0.98122 -0.01989  0.95691 -0.03646  0.85746   
+        350   1   0  0.84710  0.13533  0.73638 -0.06151  0.87873  0.08260  0.88928   
+        
+                 a10  {\ldots}        a26      a27      a28      a29      a30      a31  \textbackslash{}
+        0    0.03760  {\ldots}   -0.51171  0.41078 -0.46168  0.21266 -0.34090  0.42267   
+        1   -0.04549  {\ldots}   -0.26569 -0.20468 -0.18401 -0.19040 -0.11593 -0.16626   
+        2    0.01198  {\ldots}   -0.40220  0.58984 -0.22145  0.43100 -0.17365  0.60436   
+        3    0.00000  {\ldots}    0.90695  0.51613  1.00000  1.00000 -0.20099  0.25682   
+        4   -0.16399  {\ldots}   -0.65158  0.13290 -0.53206  0.02431 -0.62197 -0.05707   
+        5    0.06637  {\ldots}   -0.01535 -0.03240  0.09223 -0.07859  0.00732  0.00000   
+        6   -0.27342  {\ldots}   -0.81634  0.13659 -0.82510  0.04606 -0.82395 -0.04262   
+        7    0.00000  {\ldots}    1.00000  1.00000  1.00000  0.00000  0.00000  1.00000   
+        8   -0.36174  {\ldots}   -0.65440  0.57577 -0.69712  0.25435 -0.63919  0.45114   
+        9   -0.26810  {\ldots}   -0.01326  0.20645 -0.02294  0.00000  0.00000  0.16595   
+        10  -0.43107  {\ldots}   -0.89128  0.47211 -0.86500  0.40303 -0.83675  0.30996   
+        11   0.36217  {\ldots}   -0.40888  1.00000 -0.62745  1.00000 -1.00000  1.00000   
+        12  -0.19277  {\ldots}   -0.47137  0.76224 -0.58370  0.65723 -0.68794  0.68714   
+        13  -0.12090  {\ldots}   -0.17012  1.00000  0.35924  1.00000 -0.66494  1.00000   
+        14   0.08764  {\ldots}    0.20033  1.00000  0.36743  0.95603  0.48641  1.00000   
+        15  -1.00000  {\ldots}    0.92236  0.39752  0.26501  0.00000  0.00000  1.00000   
+        16   0.02312  {\ldots}    0.13412  0.79476  0.13638  0.79110  0.15379  0.77122   
+        17   1.00000  {\ldots}    1.00000  1.00000 -1.00000 -1.00000  1.00000 -1.00000   
+        18   0.34081  {\ldots}    0.23724  0.46167  0.24618  0.43433  0.25306  0.40663   
+        19   1.00000  {\ldots}    1.00000  1.00000  1.00000  1.00000 -1.00000  1.00000   
+        20  -0.10605  {\ldots}   -0.40372  0.82681 -0.42231  0.75784 -0.38231  0.80448   
+        21  -1.00000  {\ldots}    0.00000  1.00000 -1.00000 -1.00000  1.00000 -1.00000   
+        22  -0.05144  {\ldots}   -0.07705  0.58051 -0.02205  0.49664 -0.01251  0.51310   
+        23   1.00000  {\ldots}   -1.00000  1.00000 -1.00000  1.00000  1.00000 -1.00000   
+        24  -0.01707  {\ldots}   -0.34838  0.72529 -0.29174  0.73094 -0.38576  0.54356   
+        25  -1.00000  {\ldots}   -1.00000  1.00000 -1.00000  1.00000 -1.00000  1.00000   
+        26   0.61053  {\ldots}   -0.82868  0.48136 -0.86583  0.40650 -0.89674  0.32984   
+        27  -0.37500  {\ldots}   -1.00000 -1.00000  1.00000 -1.00000 -1.00000  0.00000   
+        28   0.64520  {\ldots}    1.00000  0.83899  1.00000  0.74822  1.00000  0.64358   
+        29   1.00000  {\ldots}    1.00000  1.00000 -1.00000  1.00000 -1.00000 -1.00000   
+        ..       {\ldots}  {\ldots}        {\ldots}      {\ldots}      {\ldots}      {\ldots}      {\ldots}      {\ldots}   
+        321  0.02772  {\ldots}    0.02376  0.89002  0.01611  0.88119  0.00198  0.87327   
+        322  0.05674  {\ldots}    0.04610  0.94305  0.03247  0.94681  0.02482  1.00000   
+        323  0.09091  {\ldots}    0.05929  0.46362  0.06142  0.33333 -0.03030  0.41856   
+        324  0.85893  {\ldots}   -0.59954  0.15360 -0.53127  0.32309 -0.37088  0.46189   
+        325  0.93345  {\ldots}   -0.73856  0.33531 -0.62296  0.52414 -0.42086  0.61217   
+        326  0.97820  {\ldots}   -0.85368  0.67538 -0.61959  0.85977 -0.28123  0.88654   
+        327  0.93596  {\ldots}   -0.45950  0.85471 -0.06831  1.00000  1.00000  0.38670   
+        328  0.73062  {\ldots}   -0.39394  0.72961  0.12331  0.96970  0.57576  0.24242   
+        329  0.01829  {\ldots}    0.04878  0.89666  0.02226  0.90854  0.00915  1.00000   
+        330  0.01064  {\ldots}    0.15957  0.89527  0.08165  0.77660  0.06738  0.92553   
+        331 -0.01418  {\ldots}    0.11348  0.83429  0.06014  0.74468 -0.03546  0.81710   
+        332  0.00000  {\ldots}   -0.04348  0.82111  0.02033  0.81988  0.08696  0.80757   
+        333  0.01599  {\ldots}    0.03552  0.97540  0.06477  0.94849  0.08171  0.99112   
+        334 -0.01436  {\ldots}   -0.00663  0.98033  0.01600  0.97901  0.01547  0.98564   
+        335  0.06264  {\ldots}    0.10067  0.99989  0.08763  0.99105  0.08501  1.00000   
+        336  0.93182  {\ldots}   -0.69774  0.26028 -0.60678  0.44569 -0.43383  0.54209   
+        337  0.96534  {\ldots}   -0.82154  0.74105 -0.55231  0.89415 -0.18725  0.87893   
+        338  0.91993  {\ldots}   -0.18560  0.39599 -0.11498  0.31005  0.05614  0.21443   
+        339  0.82139  {\ldots}   -0.18645  0.74758  0.23713  0.45185  0.59071  0.20549   
+        340 -0.18321  {\ldots}    0.24692  0.03913  0.31092 -0.03817  0.26336 -0.16794   
+        341  0.02394  {\ldots}    0.08107  0.96709  0.07255  0.95701  0.08088  0.98190   
+        342 -0.07514  {\ldots}   -0.02370  0.76717 -0.02731  0.74046 -0.07630  0.70058   
+        343 -0.06119  {\ldots}   -0.00564  0.39146 -0.09038  0.35588 -0.10306  0.32232   
+        344  0.02304  {\ldots}   -0.00303  0.70886  0.01375  0.66161  0.00849  0.66298   
+        345 -0.00273  {\ldots}    0.06967  0.68656  0.17088  0.87568  0.07787  0.55328   
+        346 -0.04622  {\ldots}   -0.04202  0.83479  0.00123  1.00000  0.12815  0.86660   
+        347  0.01606  {\ldots}    0.01361  0.93522  0.04925  0.93159  0.08168  0.94066   
+        348  0.02446  {\ldots}    0.03193  0.92489  0.02542  0.92120  0.02242  0.92459   
+        349  0.00110  {\ldots}   -0.02099  0.89147 -0.07760  0.82983 -0.17238  0.96022   
+        350 -0.09139  {\ldots}   -0.15114  0.81147 -0.04822  0.78207 -0.00703  0.75747   
+        
+                 a32      a33      a34  label  
+        0   -0.54487  0.18641 -0.45300      1  
+        1   -0.06288 -0.13738 -0.02447      0  
+        2   -0.24180  0.56045 -0.38238      1  
+        3    1.00000 -0.32382  1.00000      0  
+        4   -0.59573 -0.04608 -0.65697      1  
+        5    0.00000 -0.00039  0.12011      0  
+        6   -0.81318 -0.13832 -0.80975      1  
+        7    1.00000  0.00000  0.00000      0  
+        8   -0.72779  0.38895 -0.73420      1  
+        9    0.24086 -0.08208  0.38065      0  
+        10  -0.89093  0.22995 -0.89158      1  
+        11  -1.00000  1.00000 -1.00000      0  
+        12  -0.64537  0.64727 -0.67226      1  
+        13   0.88428  1.00000 -0.18826      0  
+        14   0.32492  1.00000  0.46712      1  
+        15   0.23188  0.00000  0.00000      0  
+        16   0.15930  0.70941  0.12015      1  
+        17  -1.00000  1.00000 -1.00000      0  
+        18   0.25792  1.00000  0.33036      1  
+        19   1.00000  1.00000  1.00000      0  
+        20  -0.40575  0.74354 -0.45039      1  
+        21   1.00000 -1.00000  1.00000      0  
+        22  -0.00015  0.52099 -0.00182      1  
+        23   1.00000  0.00000  0.00000      0  
+        24  -0.26284  0.64207 -0.39487      1  
+        25  -1.00000  1.00000 -1.00000      0  
+        26  -0.92128 -0.13341 -1.00000      1  
+        27   0.00000 -1.00000  1.00000      0  
+        28   1.00000  0.52479  1.00000      1  
+        29   1.00000  1.00000 -1.00000      0  
+        ..       {\ldots}      {\ldots}      {\ldots}    {\ldots}  
+        321  0.04158  0.86733  0.02376      1  
+        322  0.01064  0.93617  0.02128      1  
+        323  0.06410  0.39394  0.24242      1  
+        324 -0.19681  0.40956  0.01820      1  
+        325 -0.17343  0.60073  0.08660      1  
+        326  0.09800  0.75495  0.46301      1  
+        327  0.00246  0.17758  0.79790      1  
+        328  0.36364  0.09091  0.33333      1  
+        329  0.05488  0.97561 -0.01220      1  
+        330  0.18085  0.92553  0.00000      1  
+        331  0.06800  0.80774  0.07173      1  
+        332  0.02308  0.80088  0.02441      1  
+        333  0.06217  0.98934  0.09947      1  
+        334  0.02099  0.98674  0.02762      1  
+        335  0.10067  1.00000  0.10067      1  
+        336 -0.21542  0.56286  0.02823      1  
+        337  0.20359  0.70555  0.54852      1  
+        338  0.20540  0.13376  0.26422      1  
+        339  0.76764 -0.18533  0.74356      1  
+        340  0.16794 -0.30153 -0.33588      1  
+        341  0.08126  0.97247  0.08616      1  
+        342 -0.04220  0.78439  0.01214      1  
+        343 -0.08637  0.28943 -0.08300      1  
+        344  0.01484  0.63887  0.01525      1  
+        345  0.24590  0.13934  0.48087      1  
+        346 -0.10714  0.90546 -0.04307      1  
+        347 -0.00035  0.91483  0.04712      1  
+        348  0.00442  0.92697 -0.00577      1  
+        349 -0.03757  0.87403 -0.16243      1  
+        350 -0.06678  0.85764 -0.06151      1  
+        
+        [351 rows x 35 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}      a1  a2       a3       a4       a5       a6       a7       a8       a9  \textbackslash{}
+        0     1   0  0.99539 -0.05889  0.85243  0.02306  0.83398 -0.37708  1.00000   
+        1     1   0  1.00000 -0.18829  0.93035 -0.36156 -0.10868 -0.93597  1.00000   
+        2     1   0  1.00000 -0.03365  1.00000  0.00485  1.00000 -0.12062  0.88965   
+        3     1   0  1.00000 -0.45161  1.00000  1.00000  0.71216 -1.00000  0.00000   
+        4     1   0  1.00000 -0.02401  0.94140  0.06531  0.92106 -0.23255  0.77152   
+        5     1   0  0.02337 -0.00592 -0.09924 -0.11949 -0.00763 -0.11824  0.14706   
+        6     1   0  0.97588 -0.10602  0.94601 -0.20800  0.92806 -0.28350  0.85996   
+        7     0   0  0.00000  0.00000  0.00000  0.00000  1.00000 -1.00000  0.00000   
+        8     1   0  0.96355 -0.07198  1.00000 -0.14333  1.00000 -0.21313  1.00000   
+        9     1   0 -0.01864 -0.08459  0.00000  0.00000  0.00000  0.00000  0.11470   
+        10    1   0  1.00000  0.06655  1.00000 -0.18388  1.00000 -0.27320  1.00000   
+        11    1   0  1.00000 -0.54210  1.00000 -1.00000  1.00000 -1.00000  1.00000   
+        12    1   0  1.00000 -0.16316  1.00000 -0.10169  0.99999 -0.15197  1.00000   
+        13    1   0  1.00000 -0.86701  1.00000  0.22280  0.85492 -0.39896  1.00000   
+        14    1   0  1.00000  0.07380  1.00000  0.03420  1.00000 -0.05563  1.00000   
+        15    1   0  0.50932 -0.93996  1.00000  0.26708 -0.03520 -1.00000  1.00000   
+        16    1   0  0.99645  0.06468  1.00000 -0.01236  0.97811  0.02498  0.96112   
+        17    0   0  0.00000  0.00000 -1.00000 -1.00000  1.00000  1.00000 -1.00000   
+        18    1   0  0.67065  0.02528  0.66626  0.05031  0.57197  0.18761  0.08776   
+        19    0   0  1.00000 -1.00000  0.00000  0.00000  0.00000  0.00000  1.00000   
+        20    1   0  1.00000 -0.00612  1.00000 -0.09834  1.00000 -0.07649  1.00000   
+        21    0   0  1.00000  1.00000  0.00000  0.00000  0.00000  0.00000 -1.00000   
+        22    1   0  0.96071  0.07088  1.00000  0.04296  1.00000  0.09313  0.90169   
+        23    0   0 -1.00000  1.00000  0.00000  0.00000  0.00000  0.00000 -1.00000   
+        24    1   0  1.00000 -0.06182  1.00000  0.02942  1.00000 -0.05131  1.00000   
+        25    1   0  1.00000  0.57820  1.00000 -1.00000  1.00000 -1.00000  1.00000   
+        26    1   0  1.00000 -0.08714  1.00000 -0.17263  0.86635 -0.81779  0.94817   
+        27    0   0 -1.00000 -1.00000  0.00000  0.00000 -1.00000  1.00000  1.00000   
+        28    1   0  1.00000  0.08380  1.00000  0.17387  1.00000 -0.13308  0.98172   
+        29    0   0 -1.00000 -1.00000  1.00000  1.00000  1.00000 -1.00000 -1.00000   
+        ..   ..  ..      {\ldots}      {\ldots}      {\ldots}      {\ldots}      {\ldots}      {\ldots}      {\ldots}   
+        321   1   0  0.89505 -0.03168  0.87525  0.05545  0.89505  0.01386  0.92871   
+        322   1   0  0.90071  0.01773  1.00000 -0.01773  0.90071  0.00709  0.84752   
+        323   1   0  0.39394 -0.24242  0.62655  0.01270  0.45455  0.09091  0.63636   
+        324   1   0  0.86689  0.35950  0.72014  0.66667  0.37201  0.83049  0.08646   
+        325   1   0  0.89563  0.37917  0.67311  0.69438  0.35916  0.88696 -0.04193   
+        326   1   0  0.90547  0.41113  0.65354  0.74761  0.29921  0.95905 -0.13342   
+        327   1   0  1.00000  1.00000  0.36700  0.06158  0.12993  0.92713 -0.27586   
+        328   1   0  1.00000  0.51515  0.45455  0.33333  0.06061  0.36364 -0.32104   
+        329   1   0  0.88110  0.00000  0.94817 -0.02744  0.93598 -0.01220  0.90244   
+        330   1   0  0.82624  0.08156  0.79078 -0.08156  0.90426 -0.01773  0.92908   
+        331   1   0  0.74468  0.10638  0.88706  0.00982  0.88542  0.01471  0.87234   
+        332   1   0  0.87578  0.03727  0.89951  0.00343  0.89210  0.00510  0.86335   
+        333   1   0  0.97513  0.00710  0.98579  0.01954  1.00000  0.01954  0.99290   
+        334   1   0  1.00000  0.01105  1.00000  0.01105  1.00000  0.02320  0.99448   
+        335   1   0  1.00000 -0.01342  1.00000  0.01566  1.00000 -0.00224  1.00000   
+        336   1   0  0.88420  0.36724  0.67123  0.67382  0.39613  0.86399  0.02424   
+        337   1   0  0.90147  0.41786  0.64131  0.75725  0.30440  0.95148 -0.20449   
+        338   1   0  0.32789  0.11042  0.15970  0.29308  0.14020  0.74485 -0.25131   
+        339   1   0  0.65845  0.43617  0.44681  0.74804  0.05319  0.85106 -0.32027   
+        340   1   0  0.19466  0.05725  0.04198  0.25191 -0.10557  0.48866 -0.18321   
+        341   1   0  0.98002  0.00075  1.00000  0.00000  0.98982 -0.00075  0.94721   
+        342   1   0  0.82254 -0.07572  0.80462  0.00231  0.87514 -0.01214  0.86821   
+        343   1   0  0.35346 -0.13768  0.69387 -0.02423  0.68195 -0.03574  0.55717   
+        344   1   0  0.76046  0.01092  0.86335  0.00258  0.85821  0.00384  0.79988   
+        345   1   0  0.66667 -0.01366  0.97404  0.06831  0.49590  0.50137  0.75683   
+        346   1   0  0.83508  0.08298  0.73739 -0.14706  0.84349 -0.05567  0.90441   
+        347   1   0  0.95113  0.00419  0.95183 -0.02723  0.93438 -0.01920  0.94590   
+        348   1   0  0.94701 -0.00034  0.93207 -0.03227  0.95177 -0.03431  0.95584   
+        349   1   0  0.90608 -0.01657  0.98122 -0.01989  0.95691 -0.03646  0.85746   
+        350   1   0  0.84710  0.13533  0.73638 -0.06151  0.87873  0.08260  0.88928   
+        
+                 a10   {\ldots}         a25      a26      a27      a28      a29      a30  \textbackslash{}
+        0    0.03760   {\ldots}     0.56811 -0.51171  0.41078 -0.46168  0.21266 -0.34090   
+        1   -0.04549   {\ldots}    -0.20332 -0.26569 -0.20468 -0.18401 -0.19040 -0.11593   
+        2    0.01198   {\ldots}     0.57528 -0.40220  0.58984 -0.22145  0.43100 -0.17365   
+        3    0.00000   {\ldots}     1.00000  0.90695  0.51613  1.00000  1.00000 -0.20099   
+        4   -0.16399   {\ldots}     0.03286 -0.65158  0.13290 -0.53206  0.02431 -0.62197   
+        5    0.06637   {\ldots}     0.03513 -0.01535 -0.03240  0.09223 -0.07859  0.00732   
+        6   -0.27342   {\ldots}     0.22792 -0.81634  0.13659 -0.82510  0.04606 -0.82395   
+        7    0.00000   {\ldots}     1.00000  1.00000  1.00000  1.00000  0.00000  0.00000   
+        8   -0.36174   {\ldots}     0.85106 -0.65440  0.57577 -0.69712  0.25435 -0.63919   
+        9   -0.26810   {\ldots}    -0.14803 -0.01326  0.20645 -0.02294  0.00000  0.00000   
+        10  -0.43107   {\ldots}     0.55867 -0.89128  0.47211 -0.86500  0.40303 -0.83675   
+        11   0.36217   {\ldots}     1.00000 -0.40888  1.00000 -0.62745  1.00000 -1.00000   
+        12  -0.19277   {\ldots}     0.84080 -0.47137  0.76224 -0.58370  0.65723 -0.68794   
+        13  -0.12090   {\ldots}     1.00000 -0.17012  1.00000  0.35924  1.00000 -0.66494   
+        14   0.08764   {\ldots}     1.00000  0.20033  1.00000  0.36743  0.95603  0.48641   
+        15  -1.00000   {\ldots}    -0.16253  0.92236  0.39752  0.26501  0.00000  0.00000   
+        16   0.02312   {\ldots}     0.81329  0.13412  0.79476  0.13638  0.79110  0.15379   
+        17   1.00000   {\ldots}    -1.00000  1.00000  1.00000 -1.00000 -1.00000  1.00000   
+        18   0.34081   {\ldots}     0.48838  0.23724  0.46167  0.24618  0.43433  0.25306   
+        19   1.00000   {\ldots}    -1.00000  1.00000  1.00000  1.00000  1.00000 -1.00000   
+        20  -0.10605   {\ldots}     0.81874 -0.40372  0.82681 -0.42231  0.75784 -0.38231   
+        21  -1.00000   {\ldots}     0.00000  0.00000  1.00000 -1.00000 -1.00000  1.00000   
+        22  -0.05144   {\ldots}     0.55677 -0.07705  0.58051 -0.02205  0.49664 -0.01251   
+        23   1.00000   {\ldots}    -1.00000 -1.00000  1.00000 -1.00000  1.00000  1.00000   
+        24  -0.01707   {\ldots}     0.84932 -0.34838  0.72529 -0.29174  0.73094 -0.38576   
+        25  -1.00000   {\ldots}     1.00000 -1.00000  1.00000 -1.00000  1.00000 -1.00000   
+        26   0.61053   {\ldots}     0.55389 -0.82868  0.48136 -0.86583  0.40650 -0.89674   
+        27  -0.37500   {\ldots}     1.00000 -1.00000 -1.00000  1.00000 -1.00000 -1.00000   
+        28   0.64520   {\ldots}     0.91624  1.00000  0.83899  1.00000  0.74822  1.00000   
+        29   1.00000   {\ldots}     1.00000  1.00000  1.00000 -1.00000  1.00000 -1.00000   
+        ..       {\ldots}   {\ldots}         {\ldots}      {\ldots}      {\ldots}      {\ldots}      {\ldots}      {\ldots}   
+        321  0.02772   {\ldots}     0.89307  0.02376  0.89002  0.01611  0.88119  0.00198   
+        322  0.05674   {\ldots}     0.90071  0.04610  0.94305  0.03247  0.94681  0.02482   
+        323  0.09091   {\ldots}     0.48526  0.05929  0.46362  0.06142  0.33333 -0.03030   
+        324  0.85893   {\ldots}    -0.02844 -0.59954  0.15360 -0.53127  0.32309 -0.37088   
+        325  0.93345   {\ldots}     0.06911 -0.73856  0.33531 -0.62296  0.52414 -0.42086   
+        326  0.97820   {\ldots}     0.36318 -0.85368  0.67538 -0.61959  0.85977 -0.28123   
+        327  0.93596   {\ldots}     0.73792 -0.45950  0.85471 -0.06831  1.00000  1.00000   
+        328  0.73062   {\ldots}     1.00000 -0.39394  0.72961  0.12331  0.96970  0.57576   
+        329  0.01829   {\ldots}     0.99695  0.04878  0.89666  0.02226  0.90854  0.00915   
+        330  0.01064   {\ldots}     0.91135  0.15957  0.89527  0.08165  0.77660  0.06738   
+        331 -0.01418   {\ldots}     0.87234  0.11348  0.83429  0.06014  0.74468 -0.03546   
+        332  0.00000   {\ldots}     0.79503 -0.04348  0.82111  0.02033  0.81988  0.08696   
+        333  0.01599   {\ldots}     0.98401  0.03552  0.97540  0.06477  0.94849  0.08171   
+        334 -0.01436   {\ldots}     0.97127 -0.00663  0.98033  0.01600  0.97901  0.01547   
+        335  0.06264   {\ldots}     1.00000  0.10067  0.99989  0.08763  0.99105  0.08501   
+        336  0.93182   {\ldots}     0.00806 -0.69774  0.26028 -0.60678  0.44569 -0.43383   
+        337  0.96534   {\ldots}     0.44483 -0.82154  0.74105 -0.55231  0.89415 -0.18725   
+        338  0.91993   {\ldots}     0.28307 -0.18560  0.39599 -0.11498  0.31005  0.05614   
+        339  0.82139   {\ldots}     0.74300 -0.18645  0.74758  0.23713  0.45185  0.59071   
+        340 -0.18321   {\ldots}     0.21645  0.24692  0.03913  0.31092 -0.03817  0.26336   
+        341  0.02394   {\ldots}     0.94155  0.08107  0.96709  0.07255  0.95701  0.08088   
+        342 -0.07514   {\ldots}     0.74451 -0.02370  0.76717 -0.02731  0.74046 -0.07630   
+        343 -0.06119   {\ldots}     0.45008 -0.00564  0.39146 -0.09038  0.35588 -0.10306   
+        344  0.02304   {\ldots}     0.77138 -0.00303  0.70886  0.01375  0.66161  0.00849   
+        345 -0.00273   {\ldots}     0.60656  0.06967  0.68656  0.17088  0.87568  0.07787   
+        346 -0.04622   {\ldots}     0.95378 -0.04202  0.83479  0.00123  1.00000  0.12815   
+        347  0.01606   {\ldots}     0.94520  0.01361  0.93522  0.04925  0.93159  0.08168   
+        348  0.02446   {\ldots}     0.93988  0.03193  0.92489  0.02542  0.92120  0.02242   
+        349  0.00110   {\ldots}     0.91050 -0.02099  0.89147 -0.07760  0.82983 -0.17238   
+        350 -0.09139   {\ldots}     0.86467 -0.15114  0.81147 -0.04822  0.78207 -0.00703   
+        
+                 a31      a32      a33      a34  
+        0    0.42267 -0.54487  0.18641 -0.45300  
+        1   -0.16626 -0.06288 -0.13738 -0.02447  
+        2    0.60436 -0.24180  0.56045 -0.38238  
+        3    0.25682  1.00000 -0.32382  1.00000  
+        4   -0.05707 -0.59573 -0.04608 -0.65697  
+        5    0.00000  0.00000 -0.00039  0.12011  
+        6   -0.04262 -0.81318 -0.13832 -0.80975  
+        7    1.00000  1.00000  0.00000  0.00000  
+        8    0.45114 -0.72779  0.38895 -0.73420  
+        9    0.16595  0.24086 -0.08208  0.38065  
+        10   0.30996 -0.89093  0.22995 -0.89158  
+        11   1.00000 -1.00000  1.00000 -1.00000  
+        12   0.68714 -0.64537  0.64727 -0.67226  
+        13   1.00000  0.88428  1.00000 -0.18826  
+        14   1.00000  0.32492  1.00000  0.46712  
+        15   1.00000  0.23188  0.00000  0.00000  
+        16   0.77122  0.15930  0.70941  0.12015  
+        17  -1.00000 -1.00000  1.00000 -1.00000  
+        18   0.40663  0.25792  1.00000  0.33036  
+        19   1.00000  1.00000  1.00000  1.00000  
+        20   0.80448 -0.40575  0.74354 -0.45039  
+        21  -1.00000  1.00000 -1.00000  1.00000  
+        22   0.51310 -0.00015  0.52099 -0.00182  
+        23  -1.00000  1.00000  0.00000  0.00000  
+        24   0.54356 -0.26284  0.64207 -0.39487  
+        25   1.00000 -1.00000  1.00000 -1.00000  
+        26   0.32984 -0.92128 -0.13341 -1.00000  
+        27   0.00000  0.00000 -1.00000  1.00000  
+        28   0.64358  1.00000  0.52479  1.00000  
+        29  -1.00000  1.00000  1.00000 -1.00000  
+        ..       {\ldots}      {\ldots}      {\ldots}      {\ldots}  
+        321  0.87327  0.04158  0.86733  0.02376  
+        322  1.00000  0.01064  0.93617  0.02128  
+        323  0.41856  0.06410  0.39394  0.24242  
+        324  0.46189 -0.19681  0.40956  0.01820  
+        325  0.61217 -0.17343  0.60073  0.08660  
+        326  0.88654  0.09800  0.75495  0.46301  
+        327  0.38670  0.00246  0.17758  0.79790  
+        328  0.24242  0.36364  0.09091  0.33333  
+        329  1.00000  0.05488  0.97561 -0.01220  
+        330  0.92553  0.18085  0.92553  0.00000  
+        331  0.81710  0.06800  0.80774  0.07173  
+        332  0.80757  0.02308  0.80088  0.02441  
+        333  0.99112  0.06217  0.98934  0.09947  
+        334  0.98564  0.02099  0.98674  0.02762  
+        335  1.00000  0.10067  1.00000  0.10067  
+        336  0.54209 -0.21542  0.56286  0.02823  
+        337  0.87893  0.20359  0.70555  0.54852  
+        338  0.21443  0.20540  0.13376  0.26422  
+        339  0.20549  0.76764 -0.18533  0.74356  
+        340 -0.16794  0.16794 -0.30153 -0.33588  
+        341  0.98190  0.08126  0.97247  0.08616  
+        342  0.70058 -0.04220  0.78439  0.01214  
+        343  0.32232 -0.08637  0.28943 -0.08300  
+        344  0.66298  0.01484  0.63887  0.01525  
+        345  0.55328  0.24590  0.13934  0.48087  
+        346  0.86660 -0.10714  0.90546 -0.04307  
+        347  0.94066 -0.00035  0.91483  0.04712  
+        348  0.92459  0.00442  0.92697 -0.00577  
+        349  0.96022 -0.03757  0.87403 -0.16243  
+        350  0.75747 -0.06678  0.85764 -0.06151  
+        
+        [351 rows x 34 columns]
+\end{Verbatim}
+            
+    \hypertarget{svm-kernels}{%
+\section{SVM Kernels}\label{svm-kernels}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{scoring}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{roc\PYZus{}auc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{linear}{%
+\subsection{Linear}\label{linear}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{svm} \PY{o}{=} \PY{n}{l\PYZus{}svm} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{l\PYZus{}c}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{l\PYZus{}gamma}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{l\PYZus{}degree}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Work through c\PYZhy{}values}
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{n}{svm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{l\PYZus{}c}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{svm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}scores = cross\PYZus{}val\PYZus{}score(svm, data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}], cv=10)}
+             \PY{c+c1}{\PYZsh{}l\PYZus{}c[key]=np.average(scores)}
+             
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{n}{svm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{l\PYZus{}degree}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{svm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}scores = cross\PYZus{}val\PYZus{}score(svm, data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}], cv=10)}
+             \PY{c+c1}{\PYZsh{}l\PYZus{}degree[key]=np.average(scores)}
+             
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}    
+             
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{gamma}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{n}{svm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{l\PYZus{}gamma}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{svm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}scores = cross\PYZus{}val\PYZus{}score(svm, data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}], cv=10)}
+             \PY{c+c1}{\PYZsh{}l\PYZus{}gamma[key]=np.average(scores)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{l\PYZus{}c}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{l\PYZus{}degree}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{l\PYZus{}gamma}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+OrderedDict([(0.01, 0.86894586894586889), (0.011233240329780276, 0.87464387464387461), (0.012618568830660204, 0.87464387464387461), (0.014174741629268055, 0.87464387464387461), (0.015922827933410922, 0.87749287749287752), (0.017886495290574352, 0.87749287749287752), (0.02009233002565047, 0.88034188034188032), (0.022570197196339202, 0.88603988603988604), (0.025353644939701114, 0.88603988603988604), (0.028480358684358019, 0.88319088319088324), (0.031992671377973847, 0.88888888888888884), (0.035938136638046278, 0.88888888888888884), (0.040370172585965536, 0.88888888888888884), (0.045348785081285821, 0.89173789173789175), (0.050941380148163802, 0.89173789173789175), (0.057223676593502172, 0.89173789173789175), (0.064280731172843192, 0.89458689458689455), (0.072208090183854642, 0.90028490028490027), (0.081113083078968723, 0.90028490028490027), (0.091116275611548919, 0.90313390313390318), (0.10235310218990264, 0.90598290598290598), (0.11497569953977356, 0.9116809116809117), (0.12915496650148839, 0.90883190883190879), (0.14508287784959395, 0.90883190883190879), (0.16297508346206444, 0.9116809116809117), (0.18307382802953678, 0.9116809116809117), (0.20565123083486514, 0.9145299145299145), (0.23101297000831592, 0.9145299145299145), (0.25950242113997357, 0.9145299145299145), (0.29150530628251758, 0.9145299145299145), (0.32745491628777285, 0.9145299145299145), (0.36783797718286326, 0.9145299145299145), (0.41320124001153363, 0.91737891737891741), (0.46415888336127797, 0.9145299145299145), (0.52140082879996841, 0.92022792022792022), (0.58570208180566674, 0.92307692307692313), (0.65793322465756787, 0.92592592592592593), (0.73907220335257795, 0.92307692307692313), (0.83021756813197434, 0.92022792022792022), (0.93260334688321989, 0.92592592592592593), (1.0476157527896652, 0.92307692307692313), (1.1768119524349978, 0.93162393162393164), (1.3219411484660286, 0.93162393162393164), (1.4849682622544651, 0.92877492877492873), (1.6681005372000592, 0.93162393162393164), (1.873817422860383, 0.93447293447293445), (2.1049041445120196, 0.93162393162393164), (2.364489412645407, 0.93447293447293445), (2.6560877829466869, 0.93732193732193736), (2.9836472402833403, 0.93732193732193736), (3.3516026509388408, 0.93732193732193736), (3.7649358067924674, 0.93732193732193736), (4.2292428743894988, 0.93732193732193736), (4.7508101621027983, 0.94301994301994307), (5.3366992312063068, 0.94017094017094016), (5.9948425031894086, 0.93732193732193736), (6.7341506577508214, 0.93732193732193736), (7.5646332755462904, 0.94301994301994307), (8.4975343590864387, 0.94301994301994307), (9.5454845666183381, 0.94301994301994307), (10.722672220103231, 0.94301994301994307), (12.045035402587823, 0.94017094017094016), (13.530477745798061, 0.94017094017094016), (15.199110829529332, 0.94017094017094016), (17.073526474706906, 0.94301994301994307), (19.179102616724887, 0.94301994301994307), (21.544346900318846, 0.94017094017094016), (24.20128264794381, 0.94586894586894588), (27.1858824273294, 0.94301994301994307), (30.538555088334157, 0.94301994301994307), (34.304692863149192, 0.94301994301994307), (38.535285937105272, 0.94017094017094016), (43.287612810830574, 0.94301994301994307), (48.626015800653533, 0.94586894586894588), (54.622772176843426, 0.94586894586894588), (61.359072734131693, 0.94586894586894588), (68.926121043496948, 0.94586894586894588), (77.426368268112697, 0.94017094017094016), (86.974900261778345, 0.94017094017094016), (97.700995729922468, 0.94017094017094016), (109.74987654930568, 0.93732193732193736), (123.28467394420659, 0.94586894586894588), (138.48863713938718, 0.94871794871794868), (155.56761439304722, 0.95156695156695159), (174.75284000076829, 0.95156695156695159), (196.30406500402725, 0.94871794871794868), (220.51307399030458, 0.94871794871794868), (247.70763559917089, 0.94586894586894588), (278.2559402207126, 0.94586894586894588), (312.57158496882352, 0.94586894586894588), (351.11917342151276, 0.94586894586894588), (394.42060594376562, 0.94586894586894588), (443.06214575838777, 0.94586894586894588), (497.70235643321138, 0.94586894586894588), (559.0810182512223, 0.94586894586894588), (628.02914418342471, 0.94586894586894588), (705.48023107186452, 0.94586894586894588), (792.48289835391699, 0.94871794871794868), (890.21508544503922, 0.94871794871794868), (1000.0, 0.94871794871794868)])
+OrderedDict([(1, 0.92307692307692313), (2, 0.92307692307692313), (3, 0.92307692307692313), (4, 0.92307692307692313), (5, 0.92307692307692313), (6, 0.92307692307692313), (7, 0.92307692307692313), (8, 0.92307692307692313), (9, 0.92307692307692313), (10, 0.92307692307692313), (11, 0.92307692307692313), (12, 0.92307692307692313), (13, 0.92307692307692313), (14, 0.92307692307692313), (15, 0.92307692307692313), (16, 0.92307692307692313), (17, 0.92307692307692313), (18, 0.92307692307692313), (19, 0.92307692307692313), (20, 0.92307692307692313), (21, 0.92307692307692313), (22, 0.92307692307692313), (23, 0.92307692307692313), (24, 0.92307692307692313), (25, 0.92307692307692313), (26, 0.92307692307692313), (27, 0.92307692307692313), (28, 0.92307692307692313), (29, 0.92307692307692313), (30, 0.92307692307692313), (31, 0.92307692307692313), (32, 0.92307692307692313), (33, 0.92307692307692313), (34, 0.92307692307692313), (35, 0.92307692307692313), (36, 0.92307692307692313), (37, 0.92307692307692313), (38, 0.92307692307692313), (39, 0.92307692307692313), (40, 0.92307692307692313), (41, 0.92307692307692313), (42, 0.92307692307692313), (43, 0.92307692307692313), (44, 0.92307692307692313), (45, 0.92307692307692313), (46, 0.92307692307692313), (47, 0.92307692307692313), (48, 0.92307692307692313), (49, 0.92307692307692313), (50, 0.92307692307692313), (51, 0.92307692307692313), (52, 0.92307692307692313), (53, 0.92307692307692313), (54, 0.92307692307692313), (55, 0.92307692307692313), (56, 0.92307692307692313), (57, 0.92307692307692313), (58, 0.92307692307692313), (59, 0.92307692307692313), (60, 0.92307692307692313), (61, 0.92307692307692313), (62, 0.92307692307692313), (63, 0.92307692307692313), (64, 0.92307692307692313), (65, 0.92307692307692313), (66, 0.92307692307692313), (67, 0.92307692307692313), (68, 0.92307692307692313), (69, 0.92307692307692313), (70, 0.92307692307692313), (71, 0.92307692307692313), (72, 0.92307692307692313), (73, 0.92307692307692313), (74, 0.92307692307692313), (75, 0.92307692307692313), (76, 0.92307692307692313), (77, 0.92307692307692313), (78, 0.92307692307692313), (79, 0.92307692307692313), (80, 0.92307692307692313), (81, 0.92307692307692313), (82, 0.92307692307692313), (83, 0.92307692307692313), (84, 0.92307692307692313), (85, 0.92307692307692313), (86, 0.92307692307692313), (87, 0.92307692307692313), (88, 0.92307692307692313), (89, 0.92307692307692313), (90, 0.92307692307692313), (91, 0.92307692307692313), (92, 0.92307692307692313), (93, 0.92307692307692313), (94, 0.92307692307692313), (95, 0.92307692307692313), (96, 0.92307692307692313), (97, 0.92307692307692313), (98, 0.92307692307692313), (99, 0.92307692307692313)])
+OrderedDict([(0.01, 0.92307692307692313), (0.010974987654930561, 0.92307692307692313), (0.012045035402587823, 0.92307692307692313), (0.013219411484660288, 0.92307692307692313), (0.014508287784959394, 0.92307692307692313), (0.015922827933410922, 0.92307692307692313), (0.017475284000076838, 0.92307692307692313), (0.019179102616724886, 0.92307692307692313), (0.021049041445120209, 0.92307692307692313), (0.023101297000831605, 0.92307692307692313), (0.025353644939701114, 0.92307692307692313), (0.027825594022071243, 0.92307692307692313), (0.030538555088334154, 0.92307692307692313), (0.033516026509388425, 0.92307692307692313), (0.03678379771828634, 0.92307692307692313), (0.040370172585965536, 0.92307692307692313), (0.044306214575838825, 0.92307692307692313), (0.048626015800653531, 0.92307692307692313), (0.0533669923120631, 0.92307692307692313), (0.058570208180566671, 0.92307692307692313), (0.06428073117284322, 0.92307692307692313), (0.070548023107186456, 0.92307692307692313), (0.077426368268112694, 0.92307692307692313), (0.084975343590864463, 0.92307692307692313), (0.093260334688321997, 0.92307692307692313), (0.10235310218990264, 0.92307692307692313), (0.11233240329780277, 0.92307692307692313), (0.12328467394420665, 0.92307692307692313), (0.13530477745798075, 0.92307692307692313), (0.14849682622544649, 0.92307692307692313), (0.16297508346206444, 0.92307692307692313), (0.1788649529057435, 0.92307692307692313), (0.19630406500402714, 0.92307692307692313), (0.21544346900318845, 0.92307692307692313), (0.23644894126454083, 0.92307692307692313), (0.25950242113997374, 0.92307692307692313), (0.2848035868435802, 0.92307692307692313), (0.3125715849688237, 0.92307692307692313), (0.34304692863149194, 0.92307692307692313), (0.37649358067924693, 0.92307692307692313), (0.41320124001153385, 0.92307692307692313), (0.45348785081285842, 0.92307692307692313), (0.49770235643321115, 0.92307692307692313), (0.54622772176843426, 0.92307692307692313), (0.59948425031894115, 0.92307692307692313), (0.65793322465756821, 0.92307692307692313), (0.72208090183854678, 0.92307692307692313), (0.79248289835391772, 0.92307692307692313), (0.86974900261778343, 0.92307692307692313), (0.95454845666183419, 0.92307692307692313), (1.0476157527896652, 0.92307692307692313), (1.1497569953977369, 0.92307692307692313), (1.2618568830660211, 0.92307692307692313), (1.3848863713938731, 0.92307692307692313), (1.5199110829529348, 0.92307692307692313), (1.6681005372000592, 0.92307692307692313), (1.8307382802953698, 0.92307692307692313), (2.0092330025650478, 0.92307692307692313), (2.2051307399030455, 0.92307692307692313), (2.4201282647943834, 0.92307692307692313), (2.6560877829466869, 0.92307692307692313), (2.9150530628251787, 0.92307692307692313), (3.1992671377973845, 0.92307692307692313), (3.5111917342151346, 0.92307692307692313), (3.8535285937105312, 0.92307692307692313), (4.2292428743894988, 0.92307692307692313), (4.641588833612782, 0.92307692307692313), (5.0941380148163802, 0.92307692307692313), (5.5908101825122287, 0.92307692307692313), (6.1359072734131761, 0.92307692307692313), (6.7341506577508286, 0.92307692307692313), (7.3907220335257824, 0.92307692307692313), (8.1113083078968717, 0.92307692307692313), (8.902150854450392, 0.92307692307692313), (9.7700995729922564, 0.92307692307692313), (10.722672220103243, 0.92307692307692313), (11.768119524349991, 0.92307692307692313), (12.915496650148841, 0.92307692307692313), (14.174741629268063, 0.92307692307692313), (15.556761439304722, 0.92307692307692313), (17.07352647470692, 0.92307692307692313), (18.73817422860385, 0.92307692307692313), (20.565123083486537, 0.92307692307692313), (22.570197196339215, 0.92307692307692313), (24.770763559917114, 0.92307692307692313), (27.185882427329428, 0.92307692307692313), (29.836472402833405, 0.92307692307692313), (32.745491628777316, 0.92307692307692313), (35.938136638046295, 0.92307692307692313), (39.442060594376599, 0.92307692307692313), (43.287612810830616, 0.92307692307692313), (47.508101621027983, 0.92307692307692313), (52.140082879996896, 0.92307692307692313), (57.223676593502205, 0.92307692307692313), (62.802914418342596, 0.92307692307692313), (68.92612104349702, 0.92307692307692313), (75.646332755462907, 0.92307692307692313), (83.021756813197527, 0.92307692307692313), (91.116275611548957, 0.92307692307692313), (100.0, 0.92307692307692313)])
+
+    \end{Verbatim}
+
+    \hypertarget{polynomial}{%
+\subsection{Polynomial}\label{polynomial}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{svm} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scale}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{p\PYZus{}c}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{p\PYZus{}gamma}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{p\PYZus{}degree}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{n}{svm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{p\PYZus{}c}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{svm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}scores = cross\PYZus{}val\PYZus{}score(svm, data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}], cv=10)}
+             \PY{c+c1}{\PYZsh{}p\PYZus{}c[key]=np.average(scores)}
+         
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{n}{svm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{p\PYZus{}degree}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{svm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}scores = cross\PYZus{}val\PYZus{}score(svm, data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}], cv=10)}
+             \PY{c+c1}{\PYZsh{}p\PYZus{}degree[key]=np.average(scores)}
+             
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}    
+             
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{gamma}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{n}{svm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{p\PYZus{}gamma}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{svm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}scores = cross\PYZus{}val\PYZus{}score(svm, data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}], cv=10)}
+             \PY{c+c1}{\PYZsh{}p\PYZus{}gamma[key]=np.average(scores)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{p\PYZus{}c}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{p\PYZus{}degree}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{p\PYZus{}gamma}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+OrderedDict([(0.01, 0.64102564102564108), (0.011233240329780276, 0.64102564102564108), (0.012618568830660204, 0.64102564102564108), (0.014174741629268055, 0.64102564102564108), (0.015922827933410922, 0.64102564102564108), (0.017886495290574352, 0.64102564102564108), (0.02009233002565047, 0.64102564102564108), (0.022570197196339202, 0.64102564102564108), (0.025353644939701114, 0.64102564102564108), (0.028480358684358019, 0.64102564102564108), (0.031992671377973847, 0.64102564102564108), (0.035938136638046278, 0.64102564102564108), (0.040370172585965536, 0.64102564102564108), (0.045348785081285821, 0.64102564102564108), (0.050941380148163802, 0.64102564102564108), (0.057223676593502172, 0.64102564102564108), (0.064280731172843192, 0.64102564102564108), (0.072208090183854642, 0.64102564102564108), (0.081113083078968723, 0.64102564102564108), (0.091116275611548919, 0.64102564102564108), (0.10235310218990264, 0.64102564102564108), (0.11497569953977356, 0.64102564102564108), (0.12915496650148839, 0.64672364672364668), (0.14508287784959395, 0.6495726495726496), (0.16297508346206444, 0.65811965811965811), (0.18307382802953678, 0.67521367521367526), (0.20565123083486514, 0.70085470085470081), (0.23101297000831592, 0.72079772079772075), (0.25950242113997357, 0.7378917378917379), (0.29150530628251758, 0.75498575498575493), (0.32745491628777285, 0.80341880341880345), (0.36783797718286326, 0.85185185185185186), (0.41320124001153363, 0.92877492877492873), (0.46415888336127797, 0.93447293447293445), (0.52140082879996841, 0.93447293447293445), (0.58570208180566674, 0.93447293447293445), (0.65793322465756787, 0.92877492877492873), (0.73907220335257795, 0.92877492877492873), (0.83021756813197434, 0.92592592592592593), (0.93260334688321989, 0.92307692307692313), (1.0476157527896652, 0.92307692307692313), (1.1768119524349978, 0.91737891737891741), (1.3219411484660286, 0.91737891737891741), (1.4849682622544651, 0.92022792022792022), (1.6681005372000592, 0.91737891737891741), (1.873817422860383, 0.92877492877492873), (2.1049041445120196, 0.93162393162393164), (2.364489412645407, 0.94017094017094016), (2.6560877829466869, 0.94017094017094016), (2.9836472402833403, 0.94871794871794868), (3.3516026509388408, 0.94301994301994307), (3.7649358067924674, 0.94301994301994307), (4.2292428743894988, 0.95156695156695159), (4.7508101621027983, 0.95156695156695159), (5.3366992312063068, 0.95441595441595439), (5.9948425031894086, 0.95441595441595439), (6.7341506577508214, 0.95441595441595439), (7.5646332755462904, 0.95441595441595439), (8.4975343590864387, 0.95441595441595439), (9.5454845666183381, 0.95726495726495731), (10.722672220103231, 0.95726495726495731), (12.045035402587823, 0.96011396011396011), (13.530477745798061, 0.96011396011396011), (15.199110829529332, 0.96011396011396011), (17.073526474706906, 0.96011396011396011), (19.179102616724887, 0.96296296296296291), (21.544346900318846, 0.96296296296296291), (24.20128264794381, 0.96296296296296291), (27.1858824273294, 0.96296296296296291), (30.538555088334157, 0.96866096866096862), (34.304692863149192, 0.96866096866096862), (38.535285937105272, 0.97435897435897434), (43.287612810830574, 0.97435897435897434), (48.626015800653533, 0.97435897435897434), (54.622772176843426, 0.97720797720797725), (61.359072734131693, 0.97720797720797725), (68.926121043496948, 0.98005698005698005), (77.426368268112697, 0.97720797720797725), (86.974900261778345, 0.97720797720797725), (97.700995729922468, 0.98005698005698005), (109.74987654930568, 0.98005698005698005), (123.28467394420659, 0.98005698005698005), (138.48863713938718, 0.98005698005698005), (155.56761439304722, 0.98005698005698005), (174.75284000076829, 0.98005698005698005), (196.30406500402725, 0.98005698005698005), (220.51307399030458, 0.98005698005698005), (247.70763559917089, 0.98290598290598286), (278.2559402207126, 0.98290598290598286), (312.57158496882352, 0.98575498575498577), (351.11917342151276, 0.98575498575498577), (394.42060594376562, 0.98575498575498577), (443.06214575838777, 0.98860398860398857), (497.70235643321138, 0.98860398860398857), (559.0810182512223, 0.98860398860398857), (628.02914418342471, 0.98860398860398857), (705.48023107186452, 0.98860398860398857), (792.48289835391699, 0.98860398860398857), (890.21508544503922, 0.98860398860398857), (1000.0, 0.98860398860398857)])
+OrderedDict([(1, 0.89173789173789175), (2, 0.93447293447293445), (3, 0.92022792022792022), (4, 0.8233618233618234), (5, 0.78632478632478631), (6, 0.76923076923076927), (7, 0.76638176638176636), (8, 0.76353276353276356), (9, 0.76353276353276356), (10, 0.76353276353276356), (11, 0.76353276353276356), (12, 0.76353276353276356), (13, 0.76353276353276356), (14, 0.76353276353276356), (15, 0.76353276353276356), (16, 0.76353276353276356), (17, 0.76353276353276356), (18, 0.76353276353276356), (19, 0.76353276353276356), (20, 0.76353276353276356), (21, 0.76353276353276356), (22, 0.76353276353276356), (23, 0.76353276353276356), (24, 0.76353276353276356), (25, 0.76353276353276356), (26, 0.76353276353276356), (27, 0.76353276353276356), (28, 0.76353276353276356), (29, 0.76353276353276356), (30, 0.76353276353276356), (31, 0.76353276353276356), (32, 0.76353276353276356), (33, 0.76353276353276356), (34, 0.76353276353276356), (35, 0.76353276353276356), (36, 0.76353276353276356), (37, 0.76353276353276356), (38, 0.76353276353276356), (39, 0.76353276353276356), (40, 0.76353276353276356), (41, 0.76353276353276356), (42, 0.76353276353276356), (43, 0.76353276353276356), (44, 0.76353276353276356), (45, 0.76353276353276356), (46, 0.76353276353276356), (47, 0.76353276353276356), (48, 0.76353276353276356), (49, 0.76353276353276356), (50, 0.76353276353276356), (51, 0.76353276353276356), (52, 0.76353276353276356), (53, 0.76353276353276356), (54, 0.76353276353276356), (55, 0.76353276353276356), (56, 0.76353276353276356), (57, 0.76353276353276356), (58, 0.76353276353276356), (59, 0.76353276353276356), (60, 0.76353276353276356), (61, 0.76353276353276356), (62, 0.76353276353276356), (63, 0.76353276353276356), (64, 0.76353276353276356), (65, 0.76353276353276356), (66, 0.76353276353276356), (67, 0.76353276353276356), (68, 0.76353276353276356), (69, 0.76353276353276356), (70, 0.76353276353276356), (71, 0.76353276353276356), (72, 0.76353276353276356), (73, 0.76353276353276356), (74, 0.76353276353276356), (75, 0.76353276353276356), (76, 0.76353276353276356), (77, 0.76353276353276356), (78, 0.76353276353276356), (79, 0.76353276353276356), (80, 0.76353276353276356), (81, 0.76353276353276356), (82, 0.76353276353276356), (83, 0.76353276353276356), (84, 0.76353276353276356), (85, 0.76353276353276356), (86, 0.76353276353276356), (87, 0.76353276353276356), (88, 0.76353276353276356), (89, 0.76353276353276356), (90, 0.76353276353276356), (91, 0.76353276353276356), (92, 0.76353276353276356), (93, 0.76353276353276356), (94, 0.76353276353276356), (95, 0.76353276353276356), (96, 0.76353276353276356), (97, 0.76353276353276356), (98, 0.76353276353276356), (99, 0.76353276353276356)])
+OrderedDict([(0.01, 0.64102564102564108), (0.010974987654930561, 0.64102564102564108), (0.012045035402587823, 0.64102564102564108), (0.013219411484660288, 0.64102564102564108), (0.014508287784959394, 0.64102564102564108), (0.015922827933410922, 0.64102564102564108), (0.017475284000076838, 0.64102564102564108), (0.019179102616724886, 0.64102564102564108), (0.021049041445120209, 0.64102564102564108), (0.023101297000831605, 0.64102564102564108), (0.025353644939701114, 0.64387464387464388), (0.027825594022071243, 0.65811965811965811), (0.030538555088334154, 0.70655270655270652), (0.033516026509388425, 0.74643874643874641), (0.03678379771828634, 0.86039886039886038), (0.040370172585965536, 0.93732193732193736), (0.044306214575838825, 0.93162393162393164), (0.048626015800653531, 0.92592592592592593), (0.0533669923120631, 0.92022792022792022), (0.058570208180566671, 0.92022792022792022), (0.06428073117284322, 0.92877492877492873), (0.070548023107186456, 0.94017094017094016), (0.077426368268112694, 0.94301994301994307), (0.084975343590864463, 0.95156695156695159), (0.093260334688321997, 0.95441595441595439), (0.10235310218990264, 0.95441595441595439), (0.11233240329780277, 0.95726495726495731), (0.12328467394420665, 0.96011396011396011), (0.13530477745798075, 0.96011396011396011), (0.14849682622544649, 0.96296296296296291), (0.16297508346206444, 0.96866096866096862), (0.1788649529057435, 0.97435897435897434), (0.19630406500402714, 0.97720797720797725), (0.21544346900318845, 0.97720797720797725), (0.23644894126454083, 0.98005698005698005), (0.25950242113997374, 0.98005698005698005), (0.2848035868435802, 0.98005698005698005), (0.3125715849688237, 0.98005698005698005), (0.34304692863149194, 0.98575498575498577), (0.37649358067924693, 0.98575498575498577), (0.41320124001153385, 0.98860398860398857), (0.45348785081285842, 0.98860398860398857), (0.49770235643321115, 0.98860398860398857), (0.54622772176843426, 0.98860398860398857), (0.59948425031894115, 0.99430199430199429), (0.65793322465756821, 0.9971509971509972), (0.72208090183854678, 0.9971509971509972), (0.79248289835391772, 0.9971509971509972), (0.86974900261778343, 0.9971509971509972), (0.95454845666183419, 0.9971509971509972), (1.0476157527896652, 0.9971509971509972), (1.1497569953977369, 0.9971509971509972), (1.2618568830660211, 1.0), (1.3848863713938731, 1.0), (1.5199110829529348, 1.0), (1.6681005372000592, 1.0), (1.8307382802953698, 1.0), (2.0092330025650478, 1.0), (2.2051307399030455, 1.0), (2.4201282647943834, 1.0), (2.6560877829466869, 1.0), (2.9150530628251787, 1.0), (3.1992671377973845, 1.0), (3.5111917342151346, 1.0), (3.8535285937105312, 1.0), (4.2292428743894988, 1.0), (4.641588833612782, 1.0), (5.0941380148163802, 1.0), (5.5908101825122287, 1.0), (6.1359072734131761, 1.0), (6.7341506577508286, 1.0), (7.3907220335257824, 1.0), (8.1113083078968717, 1.0), (8.902150854450392, 1.0), (9.7700995729922564, 1.0), (10.722672220103243, 1.0), (11.768119524349991, 1.0), (12.915496650148841, 1.0), (14.174741629268063, 1.0), (15.556761439304722, 1.0), (17.07352647470692, 1.0), (18.73817422860385, 1.0), (20.565123083486537, 1.0), (22.570197196339215, 1.0), (24.770763559917114, 1.0), (27.185882427329428, 1.0), (29.836472402833405, 1.0), (32.745491628777316, 1.0), (35.938136638046295, 1.0), (39.442060594376599, 1.0), (43.287612810830616, 1.0), (47.508101621027983, 1.0), (52.140082879996896, 1.0), (57.223676593502205, 1.0), (62.802914418342596, 1.0), (68.92612104349702, 1.0), (75.646332755462907, 1.0), (83.021756813197527, 1.0), (91.116275611548957, 1.0), (100.0, 1.0)])
+
+    \end{Verbatim}
+
+    \hypertarget{radial-basis}{%
+\subsection{Radial Basis}\label{radial-basis}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{svm} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scale}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{r\PYZus{}c}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{r\PYZus{}gamma}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{r\PYZus{}degree}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+             
+             \PY{n}{svm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{r\PYZus{}c}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{svm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}scores = cross\PYZus{}val\PYZus{}score(svm, data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}], cv=10)}
+             \PY{c+c1}{\PYZsh{}r\PYZus{}c[key]=np.average(scores)}
+         
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{n}{svm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{r\PYZus{}degree}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{svm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}scores = cross\PYZus{}val\PYZus{}score(svm, data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}], cv=10)}
+             \PY{c+c1}{\PYZsh{}r\PYZus{}degree[key]=np.average(scores)}
+             
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}    
+             
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{gamma}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{n}{svm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{r\PYZus{}gamma}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{svm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}scores = cross\PYZus{}val\PYZus{}score(svm, data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}], cv=10)}
+             \PY{c+c1}{\PYZsh{}r\PYZus{}gamma[key]=np.average(scores)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{r\PYZus{}c}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{r\PYZus{}degree}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{r\PYZus{}gamma}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+OrderedDict([(0.01, 0.64102564102564108), (0.011233240329780276, 0.64102564102564108), (0.012618568830660204, 0.64102564102564108), (0.014174741629268055, 0.64102564102564108), (0.015922827933410922, 0.64102564102564108), (0.017886495290574352, 0.64102564102564108), (0.02009233002565047, 0.64102564102564108), (0.022570197196339202, 0.64102564102564108), (0.025353644939701114, 0.64102564102564108), (0.028480358684358019, 0.64102564102564108), (0.031992671377973847, 0.64102564102564108), (0.035938136638046278, 0.64102564102564108), (0.040370172585965536, 0.64102564102564108), (0.045348785081285821, 0.64672364672364668), (0.050941380148163802, 0.68945868945868949), (0.057223676593502172, 0.7350427350427351), (0.064280731172843192, 0.76638176638176636), (0.072208090183854642, 0.81196581196581197), (0.081113083078968723, 0.86894586894586889), (0.091116275611548919, 0.89173789173789175), (0.10235310218990264, 0.91737891737891741), (0.11497569953977356, 0.92307692307692313), (0.12915496650148839, 0.92877492877492873), (0.14508287784959395, 0.93162393162393164), (0.16297508346206444, 0.93447293447293445), (0.18307382802953678, 0.93447293447293445), (0.20565123083486514, 0.93447293447293445), (0.23101297000831592, 0.93447293447293445), (0.25950242113997357, 0.93447293447293445), (0.29150530628251758, 0.93447293447293445), (0.32745491628777285, 0.93447293447293445), (0.36783797718286326, 0.93447293447293445), (0.41320124001153363, 0.94301994301994307), (0.46415888336127797, 0.94586894586894588), (0.52140082879996841, 0.94586894586894588), (0.58570208180566674, 0.94586894586894588), (0.65793322465756787, 0.94586894586894588), (0.73907220335257795, 0.95156695156695159), (0.83021756813197434, 0.95441595441595439), (0.93260334688321989, 0.95441595441595439), (1.0476157527896652, 0.95441595441595439), (1.1768119524349978, 0.96011396011396011), (1.3219411484660286, 0.96296296296296291), (1.4849682622544651, 0.96296296296296291), (1.6681005372000592, 0.96296296296296291), (1.873817422860383, 0.96296296296296291), (2.1049041445120196, 0.96296296296296291), (2.364489412645407, 0.96581196581196582), (2.6560877829466869, 0.97150997150997154), (2.9836472402833403, 0.97435897435897434), (3.3516026509388408, 0.97435897435897434), (3.7649358067924674, 0.97435897435897434), (4.2292428743894988, 0.97435897435897434), (4.7508101621027983, 0.97435897435897434), (5.3366992312063068, 0.97435897435897434), (5.9948425031894086, 0.97720797720797725), (6.7341506577508214, 0.98005698005698005), (7.5646332755462904, 0.98005698005698005), (8.4975343590864387, 0.98005698005698005), (9.5454845666183381, 0.98005698005698005), (10.722672220103231, 0.98290598290598286), (12.045035402587823, 0.98290598290598286), (13.530477745798061, 0.98290598290598286), (15.199110829529332, 0.98290598290598286), (17.073526474706906, 0.98290598290598286), (19.179102616724887, 0.98575498575498577), (21.544346900318846, 0.98575498575498577), (24.20128264794381, 0.98575498575498577), (27.1858824273294, 0.98860398860398857), (30.538555088334157, 0.98860398860398857), (34.304692863149192, 0.99145299145299148), (38.535285937105272, 0.99145299145299148), (43.287612810830574, 0.99430199430199429), (48.626015800653533, 0.99430199430199429), (54.622772176843426, 0.99430199430199429), (61.359072734131693, 0.99430199430199429), (68.926121043496948, 0.99430199430199429), (77.426368268112697, 0.99430199430199429), (86.974900261778345, 0.99430199430199429), (97.700995729922468, 0.99430199430199429), (109.74987654930568, 0.99430199430199429), (123.28467394420659, 0.9971509971509972), (138.48863713938718, 0.9971509971509972), (155.56761439304722, 0.9971509971509972), (174.75284000076829, 0.9971509971509972), (196.30406500402725, 0.9971509971509972), (220.51307399030458, 0.9971509971509972), (247.70763559917089, 0.9971509971509972), (278.2559402207126, 0.9971509971509972), (312.57158496882352, 0.9971509971509972), (351.11917342151276, 1.0), (394.42060594376562, 1.0), (443.06214575838777, 1.0), (497.70235643321138, 1.0), (559.0810182512223, 1.0), (628.02914418342471, 1.0), (705.48023107186452, 1.0), (792.48289835391699, 1.0), (890.21508544503922, 1.0), (1000.0, 1.0)])
+OrderedDict([(1, 0.95441595441595439), (2, 0.95441595441595439), (3, 0.95441595441595439), (4, 0.95441595441595439), (5, 0.95441595441595439), (6, 0.95441595441595439), (7, 0.95441595441595439), (8, 0.95441595441595439), (9, 0.95441595441595439), (10, 0.95441595441595439), (11, 0.95441595441595439), (12, 0.95441595441595439), (13, 0.95441595441595439), (14, 0.95441595441595439), (15, 0.95441595441595439), (16, 0.95441595441595439), (17, 0.95441595441595439), (18, 0.95441595441595439), (19, 0.95441595441595439), (20, 0.95441595441595439), (21, 0.95441595441595439), (22, 0.95441595441595439), (23, 0.95441595441595439), (24, 0.95441595441595439), (25, 0.95441595441595439), (26, 0.95441595441595439), (27, 0.95441595441595439), (28, 0.95441595441595439), (29, 0.95441595441595439), (30, 0.95441595441595439), (31, 0.95441595441595439), (32, 0.95441595441595439), (33, 0.95441595441595439), (34, 0.95441595441595439), (35, 0.95441595441595439), (36, 0.95441595441595439), (37, 0.95441595441595439), (38, 0.95441595441595439), (39, 0.95441595441595439), (40, 0.95441595441595439), (41, 0.95441595441595439), (42, 0.95441595441595439), (43, 0.95441595441595439), (44, 0.95441595441595439), (45, 0.95441595441595439), (46, 0.95441595441595439), (47, 0.95441595441595439), (48, 0.95441595441595439), (49, 0.95441595441595439), (50, 0.95441595441595439), (51, 0.95441595441595439), (52, 0.95441595441595439), (53, 0.95441595441595439), (54, 0.95441595441595439), (55, 0.95441595441595439), (56, 0.95441595441595439), (57, 0.95441595441595439), (58, 0.95441595441595439), (59, 0.95441595441595439), (60, 0.95441595441595439), (61, 0.95441595441595439), (62, 0.95441595441595439), (63, 0.95441595441595439), (64, 0.95441595441595439), (65, 0.95441595441595439), (66, 0.95441595441595439), (67, 0.95441595441595439), (68, 0.95441595441595439), (69, 0.95441595441595439), (70, 0.95441595441595439), (71, 0.95441595441595439), (72, 0.95441595441595439), (73, 0.95441595441595439), (74, 0.95441595441595439), (75, 0.95441595441595439), (76, 0.95441595441595439), (77, 0.95441595441595439), (78, 0.95441595441595439), (79, 0.95441595441595439), (80, 0.95441595441595439), (81, 0.95441595441595439), (82, 0.95441595441595439), (83, 0.95441595441595439), (84, 0.95441595441595439), (85, 0.95441595441595439), (86, 0.95441595441595439), (87, 0.95441595441595439), (88, 0.95441595441595439), (89, 0.95441595441595439), (90, 0.95441595441595439), (91, 0.95441595441595439), (92, 0.95441595441595439), (93, 0.95441595441595439), (94, 0.95441595441595439), (95, 0.95441595441595439), (96, 0.95441595441595439), (97, 0.95441595441595439), (98, 0.95441595441595439), (99, 0.95441595441595439)])
+OrderedDict([(0.01, 0.90028490028490027), (0.010974987654930561, 0.90883190883190879), (0.012045035402587823, 0.91737891737891741), (0.013219411484660288, 0.92307692307692313), (0.014508287784959394, 0.92022792022792022), (0.015922827933410922, 0.92307692307692313), (0.017475284000076838, 0.92877492877492873), (0.019179102616724886, 0.93732193732193736), (0.021049041445120209, 0.94017094017094016), (0.023101297000831605, 0.94301994301994307), (0.025353644939701114, 0.94301994301994307), (0.027825594022071243, 0.94301994301994307), (0.030538555088334154, 0.94586894586894588), (0.033516026509388425, 0.94586894586894588), (0.03678379771828634, 0.94586894586894588), (0.040370172585965536, 0.94586894586894588), (0.044306214575838825, 0.95156695156695159), (0.048626015800653531, 0.95441595441595439), (0.0533669923120631, 0.95726495726495731), (0.058570208180566671, 0.95726495726495731), (0.06428073117284322, 0.95726495726495731), (0.070548023107186456, 0.96296296296296291), (0.077426368268112694, 0.96296296296296291), (0.084975343590864463, 0.96296296296296291), (0.093260334688321997, 0.96296296296296291), (0.10235310218990264, 0.96296296296296291), (0.11233240329780277, 0.96296296296296291), (0.12328467394420665, 0.96581196581196582), (0.13530477745798075, 0.97150997150997154), (0.14849682622544649, 0.97435897435897434), (0.16297508346206444, 0.97435897435897434), (0.1788649529057435, 0.97435897435897434), (0.19630406500402714, 0.97435897435897434), (0.21544346900318845, 0.97720797720797725), (0.23644894126454083, 0.97720797720797725), (0.25950242113997374, 0.98005698005698005), (0.2848035868435802, 0.98005698005698005), (0.3125715849688237, 0.98290598290598286), (0.34304692863149194, 0.98575498575498577), (0.37649358067924693, 0.98575498575498577), (0.41320124001153385, 0.99145299145299148), (0.45348785081285842, 0.99145299145299148), (0.49770235643321115, 0.99145299145299148), (0.54622772176843426, 0.99145299145299148), (0.59948425031894115, 0.99145299145299148), (0.65793322465756821, 0.99145299145299148), (0.72208090183854678, 0.99430199430199429), (0.79248289835391772, 0.99430199430199429), (0.86974900261778343, 0.99430199430199429), (0.95454845666183419, 0.99430199430199429), (1.0476157527896652, 0.99430199430199429), (1.1497569953977369, 0.99430199430199429), (1.2618568830660211, 0.99430199430199429), (1.3848863713938731, 0.99430199430199429), (1.5199110829529348, 0.99430199430199429), (1.6681005372000592, 0.99430199430199429), (1.8307382802953698, 0.99430199430199429), (2.0092330025650478, 0.99430199430199429), (2.2051307399030455, 0.9971509971509972), (2.4201282647943834, 1.0), (2.6560877829466869, 1.0), (2.9150530628251787, 1.0), (3.1992671377973845, 1.0), (3.5111917342151346, 1.0), (3.8535285937105312, 1.0), (4.2292428743894988, 1.0), (4.641588833612782, 1.0), (5.0941380148163802, 1.0), (5.5908101825122287, 1.0), (6.1359072734131761, 1.0), (6.7341506577508286, 1.0), (7.3907220335257824, 1.0), (8.1113083078968717, 1.0), (8.902150854450392, 1.0), (9.7700995729922564, 1.0), (10.722672220103243, 1.0), (11.768119524349991, 1.0), (12.915496650148841, 1.0), (14.174741629268063, 1.0), (15.556761439304722, 1.0), (17.07352647470692, 1.0), (18.73817422860385, 1.0), (20.565123083486537, 1.0), (22.570197196339215, 1.0), (24.770763559917114, 1.0), (27.185882427329428, 1.0), (29.836472402833405, 1.0), (32.745491628777316, 1.0), (35.938136638046295, 1.0), (39.442060594376599, 1.0), (43.287612810830616, 1.0), (47.508101621027983, 1.0), (52.140082879996896, 1.0), (57.223676593502205, 1.0), (62.802914418342596, 1.0), (68.92612104349702, 1.0), (75.646332755462907, 1.0), (83.021756813197527, 1.0), (91.116275611548957, 1.0), (100.0, 1.0)])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{c\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{p}{[}\PY{n}{l\PYZus{}c}\PY{p}{,}\PY{n}{p\PYZus{}c}\PY{p}{,}\PY{n}{r\PYZus{}c}\PY{p}{]}\PY{p}{,}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Polynomial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Radial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{c\PYZus{}data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:}             0.010000     0.011233     0.012619     0.014175     0.015923     \textbackslash{}
+         Linear         0.868946     0.874644     0.874644     0.874644     0.877493   
+         Polynomial     0.641026     0.641026     0.641026     0.641026     0.641026   
+         Radial         0.641026     0.641026     0.641026     0.641026     0.641026   
+         
+                     0.017886     0.020092     0.022570     0.025354     0.028480     \textbackslash{}
+         Linear         0.877493     0.880342     0.886040     0.886040     0.883191   
+         Polynomial     0.641026     0.641026     0.641026     0.641026     0.641026   
+         Radial         0.641026     0.641026     0.641026     0.641026     0.641026   
+         
+                        {\ldots}       351.119173   394.420606   443.062146   497.702356   \textbackslash{}
+         Linear         {\ldots}          0.945869     0.945869     0.945869     0.945869   
+         Polynomial     {\ldots}          0.985755     0.985755     0.988604     0.988604   
+         Radial         {\ldots}          1.000000     1.000000     1.000000     1.000000   
+         
+                     559.081018   628.029144   705.480231   792.482898   890.215085   \textbackslash{}
+         Linear         0.945869     0.945869     0.945869     0.948718     0.948718   
+         Polynomial     0.988604     0.988604     0.988604     0.988604     0.988604   
+         Radial         1.000000     1.000000     1.000000     1.000000     1.000000   
+         
+                     1000.000000  
+         Linear         0.948718  
+         Polynomial     0.988604  
+         Radial         1.000000  
+         
+         [3 rows x 100 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{gamma\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{p}{[}\PY{n}{l\PYZus{}gamma}\PY{p}{,}\PY{n}{p\PYZus{}gamma}\PY{p}{,}\PY{n}{r\PYZus{}gamma}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Polynomial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Radial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{gamma\PYZus{}data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:}             0.010000    0.010975    0.012045    0.013219    0.014508    \textbackslash{}
+         Linear        0.923077    0.923077    0.923077    0.923077    0.923077   
+         Polynomial    0.641026    0.641026    0.641026    0.641026    0.641026   
+         Radial        0.900285    0.908832    0.917379    0.923077    0.920228   
+         
+                     0.015923    0.017475    0.019179    0.021049    0.023101    \textbackslash{}
+         Linear        0.923077    0.923077    0.923077    0.923077    0.923077   
+         Polynomial    0.641026    0.641026    0.641026    0.641026    0.641026   
+         Radial        0.923077    0.928775    0.937322    0.940171    0.943020   
+         
+                        {\ldots}      43.287613   47.508102   52.140083   57.223677   \textbackslash{}
+         Linear         {\ldots}        0.923077    0.923077    0.923077    0.923077   
+         Polynomial     {\ldots}        1.000000    1.000000    1.000000    1.000000   
+         Radial         {\ldots}        1.000000    1.000000    1.000000    1.000000   
+         
+                     62.802914   68.926121   75.646333   83.021757   91.116276   \textbackslash{}
+         Linear        0.923077    0.923077    0.923077    0.923077    0.923077   
+         Polynomial    1.000000    1.000000    1.000000    1.000000    1.000000   
+         Radial        1.000000    1.000000    1.000000    1.000000    1.000000   
+         
+                     100.000000  
+         Linear        0.923077  
+         Polynomial    1.000000  
+         Radial        1.000000  
+         
+         [3 rows x 100 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{degree\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{p}{[}\PY{n}{l\PYZus{}degree}\PY{p}{,}\PY{n}{p\PYZus{}degree}\PY{p}{,}\PY{n}{r\PYZus{}degree}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Polynomial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Radial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{degree\PYZus{}data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:}                   1         2         3         4         5         6   \textbackslash{}
+         Linear      0.923077  0.923077  0.923077  0.923077  0.923077  0.923077   
+         Polynomial  0.891738  0.934473  0.920228  0.823362  0.786325  0.769231   
+         Radial      0.954416  0.954416  0.954416  0.954416  0.954416  0.954416   
+         
+                           7         8         9         10    {\ldots}           90  \textbackslash{}
+         Linear      0.923077  0.923077  0.923077  0.923077    {\ldots}     0.923077   
+         Polynomial  0.766382  0.763533  0.763533  0.763533    {\ldots}     0.763533   
+         Radial      0.954416  0.954416  0.954416  0.954416    {\ldots}     0.954416   
+         
+                           91        92        93        94        95        96  \textbackslash{}
+         Linear      0.923077  0.923077  0.923077  0.923077  0.923077  0.923077   
+         Polynomial  0.763533  0.763533  0.763533  0.763533  0.763533  0.763533   
+         Radial      0.954416  0.954416  0.954416  0.954416  0.954416  0.954416   
+         
+                           97        98        99  
+         Linear      0.923077  0.923077  0.923077  
+         Polynomial  0.763533  0.763533  0.763533  
+         Radial      0.954416  0.954416  0.954416  
+         
+         [3 rows x 99 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{results} \PY{o}{=} \PY{n}{c\PYZus{}data}\PY{o}{.}\PY{n}{T}
+         
+         \PY{c+c1}{\PYZsh{}Plot the results}
+         \PY{n}{plot} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVM Kernal Performance Over Varying C Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Display plot in Jupyter}
+         \PY{n}{plot}
+         
+         \PY{n}{results} \PY{o}{=} \PY{n}{degree\PYZus{}data}\PY{o}{.}\PY{n}{T}
+         \PY{c+c1}{\PYZsh{}Plot the results}
+         \PY{n}{plot} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVM Kernal Performance Over Varying Degree Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Degree}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Display plot in Jupyter}
+         \PY{n}{plot}
+         
+         \PY{n}{results} \PY{o}{=} \PY{n}{gamma\PYZus{}data}\PY{o}{.}\PY{n}{T}
+         \PY{c+c1}{\PYZsh{}Plot the results}
+         \PY{n}{plot} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVM Kernal Performance Over Varying Gamma Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gamma}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Display plot in Jupyter}
+         \PY{n}{plot}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x21e8b3cef60>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{svm} \PY{o}{=} \PY{n}{l\PYZus{}svm} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{l\PYZus{}c}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{l\PYZus{}gamma}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{l\PYZus{}degree}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Work through c\PYZhy{}values}
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{}svm.fit(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             \PY{c+c1}{\PYZsh{}l\PYZus{}c[key] = svm.score(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             
+             \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{svm}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{l\PYZus{}c}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{scores}\PY{p}{)}
+             
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{}svm.fit(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             \PY{c+c1}{\PYZsh{}l\PYZus{}degree[key] = svm.score(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             
+             \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{svm}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{l\PYZus{}degree}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{scores}\PY{p}{)}
+             
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}    
+             
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{gamma}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{}svm.fit(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             \PY{c+c1}{\PYZsh{}l\PYZus{}gamma[key] = svm.score(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             
+             \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{svm}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{l\PYZus{}gamma}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{scores}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{l\PYZus{}c}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{l\PYZus{}degree}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{l\PYZus{}gamma}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+OrderedDict([(0.01, 0.84437441643323985), (0.011233240329780276, 0.85287114845938361), (0.012618568830660204, 0.85287114845938361), (0.014174741629268055, 0.85009337068160595), (0.015922827933410922, 0.85025676937441652), (0.017886495290574352, 0.85025676937441652), (0.02009233002565047, 0.84747899159663864), (0.022570197196339202, 0.84747899159663864), (0.025353644939701114, 0.85009337068160595), (0.028480358684358019, 0.85295051353874884), (0.031992671377973847, 0.85572829131652672), (0.035938136638046278, 0.85572829131652672), (0.040370172585965536, 0.85311391223155941), (0.045348785081285821, 0.85311391223155941), (0.050941380148163802, 0.85589169000933707), (0.057223676593502172, 0.85311391223155941), (0.064280731172843192, 0.85319794584500475), (0.072208090183854642, 0.8559757236227824), (0.081113083078968723, 0.85303454715219418), (0.091116275611548919, 0.84715219421101773), (0.10235310218990264, 0.84715219421101773), (0.11497569953977356, 0.8473155929038283), (0.12915496650148839, 0.85287114845938383), (0.14508287784959395, 0.85287114845938383), (0.16297508346206444, 0.85875350140056028), (0.18307382802953678, 0.85875350140056028), (0.20565123083486514, 0.86153127917833794), (0.23101297000831592, 0.86153127917833794), (0.25950242113997357, 0.86153127917833794), (0.29150530628251758, 0.86725023342670404), (0.32745491628777285, 0.87002801120448192), (0.36783797718286326, 0.87002801120448192), (0.41320124001153363, 0.87280578898225958), (0.46415888336127797, 0.8670868347338937), (0.52140082879996841, 0.86986461251167135), (0.58570208180566674, 0.8670868347338937), (0.65793322465756787, 0.87558356676003746), (0.73907220335257795, 0.87852474323062568), (0.83021756813197434, 0.87836134453781511), (0.93260334688321989, 0.87836134453781511), (1.0476157527896652, 0.88130252100840334), (1.1768119524349978, 0.87852474323062568), (1.3219411484660286, 0.87836134453781511), (1.4849682622544651, 0.88121848739495812), (1.6681005372000592, 0.88121848739495812), (1.873817422860383, 0.88121848739495812), (2.1049041445120196, 0.87836134453781511), (2.364489412645407, 0.87836134453781511), (2.6560877829466869, 0.87836134453781511), (2.9836472402833403, 0.87542016806722689), (3.3516026509388408, 0.87542016806722689), (3.7649358067924674, 0.87542016806722689), (4.2292428743894988, 0.87264239028944923), (4.7508101621027983, 0.88113912231559299), (5.3366992312063068, 0.88391690009337065), (5.9948425031894086, 0.87836134453781511), (6.7341506577508214, 0.88113912231559299), (7.5646332755462904, 0.87836134453781511), (8.4975343590864387, 0.88113912231559299), (9.5454845666183381, 0.88399626517273577), (10.722672220103231, 0.88399626517273577), (12.045035402587823, 0.88685340802987866), (13.530477745798061, 0.88963118580765654), (15.199110829529332, 0.88963118580765654), (17.073526474706906, 0.88963118580765654), (19.179102616724887, 0.88685340802987866), (21.544346900318846, 0.88963118580765654), (24.20128264794381, 0.88963118580765654), (27.1858824273294, 0.88979458450046689), (30.538555088334157, 0.88701680672268901), (34.304692863149192, 0.88979458450046689), (38.535285937105272, 0.88423902894491135), (43.287612810830574, 0.87868347338935582), (48.626015800653533, 0.88423902894491135), (54.622772176843426, 0.88701680672268901), (61.359072734131693, 0.87868347338935582), (68.926121043496948, 0.88423902894491135), (77.426368268112697, 0.88423902894491135), (86.974900261778345, 0.87868347338935582), (97.700995729922468, 0.87868347338935582), (109.74987654930568, 0.87590569561157794), (123.28467394420659, 0.87868347338935582), (138.48863713938718, 0.87590569561157794), (155.56761439304722, 0.87868347338935582), (174.75284000076829, 0.87868347338935582), (196.30406500402725, 0.88146125116713347), (220.51307399030458, 0.87868347338935582), (247.70763559917089, 0.87868347338935582), (278.2559402207126, 0.87868347338935582), (312.57158496882352, 0.87868347338935582), (351.11917342151276, 0.87868347338935582), (394.42060594376562, 0.88162464985994404), (443.06214575838777, 0.8844024276377217), (497.70235643321138, 0.8844024276377217), (559.0810182512223, 0.8844024276377217), (628.02914418342471, 0.8844024276377217), (705.48023107186452, 0.8844024276377217), (792.48289835391699, 0.8844024276377217), (890.21508544503922, 0.8844024276377217), (1000.0, 0.88725957049486459)])
+OrderedDict([(1, 0.87836134453781511), (2, 0.87836134453781511), (3, 0.87836134453781511), (4, 0.87836134453781511), (5, 0.87836134453781511), (6, 0.87836134453781511), (7, 0.87836134453781511), (8, 0.87836134453781511), (9, 0.87836134453781511), (10, 0.87836134453781511), (11, 0.87836134453781511), (12, 0.87836134453781511), (13, 0.87836134453781511), (14, 0.87836134453781511), (15, 0.87836134453781511), (16, 0.87836134453781511), (17, 0.87836134453781511), (18, 0.87836134453781511), (19, 0.87836134453781511), (20, 0.87836134453781511), (21, 0.87836134453781511), (22, 0.87836134453781511), (23, 0.87836134453781511), (24, 0.87836134453781511), (25, 0.87836134453781511), (26, 0.87836134453781511), (27, 0.87836134453781511), (28, 0.87836134453781511), (29, 0.87836134453781511), (30, 0.87836134453781511), (31, 0.87836134453781511), (32, 0.87836134453781511), (33, 0.87836134453781511), (34, 0.87836134453781511), (35, 0.87836134453781511), (36, 0.87836134453781511), (37, 0.87836134453781511), (38, 0.87836134453781511), (39, 0.87836134453781511), (40, 0.87836134453781511), (41, 0.87836134453781511), (42, 0.87836134453781511), (43, 0.87836134453781511), (44, 0.87836134453781511), (45, 0.87836134453781511), (46, 0.87836134453781511), (47, 0.87836134453781511), (48, 0.87836134453781511), (49, 0.87836134453781511), (50, 0.87836134453781511), (51, 0.87836134453781511), (52, 0.87836134453781511), (53, 0.87836134453781511), (54, 0.87836134453781511), (55, 0.87836134453781511), (56, 0.87836134453781511), (57, 0.87836134453781511), (58, 0.87836134453781511), (59, 0.87836134453781511), (60, 0.87836134453781511), (61, 0.87836134453781511), (62, 0.87836134453781511), (63, 0.87836134453781511), (64, 0.87836134453781511), (65, 0.87836134453781511), (66, 0.87836134453781511), (67, 0.87836134453781511), (68, 0.87836134453781511), (69, 0.87836134453781511), (70, 0.87836134453781511), (71, 0.87836134453781511), (72, 0.87836134453781511), (73, 0.87836134453781511), (74, 0.87836134453781511), (75, 0.87836134453781511), (76, 0.87836134453781511), (77, 0.87836134453781511), (78, 0.87836134453781511), (79, 0.87836134453781511), (80, 0.87836134453781511), (81, 0.87836134453781511), (82, 0.87836134453781511), (83, 0.87836134453781511), (84, 0.87836134453781511), (85, 0.87836134453781511), (86, 0.87836134453781511), (87, 0.87836134453781511), (88, 0.87836134453781511), (89, 0.87836134453781511), (90, 0.87836134453781511), (91, 0.87836134453781511), (92, 0.87836134453781511), (93, 0.87836134453781511), (94, 0.87836134453781511), (95, 0.87836134453781511), (96, 0.87836134453781511), (97, 0.87836134453781511), (98, 0.87836134453781511), (99, 0.87836134453781511)])
+OrderedDict([(0.01, 0.87836134453781511), (0.010974987654930561, 0.87836134453781511), (0.012045035402587823, 0.87836134453781511), (0.013219411484660288, 0.87836134453781511), (0.014508287784959394, 0.87836134453781511), (0.015922827933410922, 0.87836134453781511), (0.017475284000076838, 0.87836134453781511), (0.019179102616724886, 0.87836134453781511), (0.021049041445120209, 0.87836134453781511), (0.023101297000831605, 0.87836134453781511), (0.025353644939701114, 0.87836134453781511), (0.027825594022071243, 0.87836134453781511), (0.030538555088334154, 0.87836134453781511), (0.033516026509388425, 0.87836134453781511), (0.03678379771828634, 0.87836134453781511), (0.040370172585965536, 0.87836134453781511), (0.044306214575838825, 0.87836134453781511), (0.048626015800653531, 0.87836134453781511), (0.0533669923120631, 0.87836134453781511), (0.058570208180566671, 0.87836134453781511), (0.06428073117284322, 0.87836134453781511), (0.070548023107186456, 0.87836134453781511), (0.077426368268112694, 0.87836134453781511), (0.084975343590864463, 0.87836134453781511), (0.093260334688321997, 0.87836134453781511), (0.10235310218990264, 0.87836134453781511), (0.11233240329780277, 0.87836134453781511), (0.12328467394420665, 0.87836134453781511), (0.13530477745798075, 0.87836134453781511), (0.14849682622544649, 0.87836134453781511), (0.16297508346206444, 0.87836134453781511), (0.1788649529057435, 0.87836134453781511), (0.19630406500402714, 0.87836134453781511), (0.21544346900318845, 0.87836134453781511), (0.23644894126454083, 0.87836134453781511), (0.25950242113997374, 0.87836134453781511), (0.2848035868435802, 0.87836134453781511), (0.3125715849688237, 0.87836134453781511), (0.34304692863149194, 0.87836134453781511), (0.37649358067924693, 0.87836134453781511), (0.41320124001153385, 0.87836134453781511), (0.45348785081285842, 0.87836134453781511), (0.49770235643321115, 0.87836134453781511), (0.54622772176843426, 0.87836134453781511), (0.59948425031894115, 0.87836134453781511), (0.65793322465756821, 0.87836134453781511), (0.72208090183854678, 0.87836134453781511), (0.79248289835391772, 0.87836134453781511), (0.86974900261778343, 0.87836134453781511), (0.95454845666183419, 0.87836134453781511), (1.0476157527896652, 0.87836134453781511), (1.1497569953977369, 0.87836134453781511), (1.2618568830660211, 0.87836134453781511), (1.3848863713938731, 0.87836134453781511), (1.5199110829529348, 0.87836134453781511), (1.6681005372000592, 0.87836134453781511), (1.8307382802953698, 0.87836134453781511), (2.0092330025650478, 0.87836134453781511), (2.2051307399030455, 0.87836134453781511), (2.4201282647943834, 0.87836134453781511), (2.6560877829466869, 0.87836134453781511), (2.9150530628251787, 0.87836134453781511), (3.1992671377973845, 0.87836134453781511), (3.5111917342151346, 0.87836134453781511), (3.8535285937105312, 0.87836134453781511), (4.2292428743894988, 0.87836134453781511), (4.641588833612782, 0.87836134453781511), (5.0941380148163802, 0.87836134453781511), (5.5908101825122287, 0.87836134453781511), (6.1359072734131761, 0.87836134453781511), (6.7341506577508286, 0.87836134453781511), (7.3907220335257824, 0.87836134453781511), (8.1113083078968717, 0.87836134453781511), (8.902150854450392, 0.87836134453781511), (9.7700995729922564, 0.87836134453781511), (10.722672220103243, 0.87836134453781511), (11.768119524349991, 0.87836134453781511), (12.915496650148841, 0.87836134453781511), (14.174741629268063, 0.87836134453781511), (15.556761439304722, 0.87836134453781511), (17.07352647470692, 0.87836134453781511), (18.73817422860385, 0.87836134453781511), (20.565123083486537, 0.87836134453781511), (22.570197196339215, 0.87836134453781511), (24.770763559917114, 0.87836134453781511), (27.185882427329428, 0.87836134453781511), (29.836472402833405, 0.87836134453781511), (32.745491628777316, 0.87836134453781511), (35.938136638046295, 0.87836134453781511), (39.442060594376599, 0.87836134453781511), (43.287612810830616, 0.87836134453781511), (47.508101621027983, 0.87836134453781511), (52.140082879996896, 0.87836134453781511), (57.223676593502205, 0.87836134453781511), (62.802914418342596, 0.87836134453781511), (68.92612104349702, 0.87836134453781511), (75.646332755462907, 0.87836134453781511), (83.021756813197527, 0.87836134453781511), (91.116275611548957, 0.87836134453781511), (100.0, 0.87836134453781511)])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{svm} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scale}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{p\PYZus{}c}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{p\PYZus{}gamma}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{p\PYZus{}degree}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{}svm.fit(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             \PY{c+c1}{\PYZsh{}p\PYZus{}c[key] = svm.score(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             
+             \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{svm}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{p\PYZus{}c}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{scores}\PY{p}{)}
+         
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{}svm.fit(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             \PY{c+c1}{\PYZsh{}p\PYZus{}degree[key] = svm.score(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             
+             \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{svm}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{p\PYZus{}degree}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{scores}\PY{p}{)}
+             
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}    
+             
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{gamma}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{}svm.fit(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             \PY{c+c1}{\PYZsh{}p\PYZus{}gamma[key] = svm.score(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             
+             \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{svm}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{p\PYZus{}gamma}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{scores}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{p\PYZus{}c}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{p\PYZus{}degree}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{p\PYZus{}gamma}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+OrderedDict([(0.01, 0.64112511671335204), (0.011233240329780276, 0.64112511671335204), (0.012618568830660204, 0.64112511671335204), (0.014174741629268055, 0.64112511671335204), (0.015922827933410922, 0.64112511671335204), (0.017886495290574352, 0.64112511671335204), (0.02009233002565047, 0.64112511671335204), (0.022570197196339202, 0.64112511671335204), (0.025353644939701114, 0.64112511671335204), (0.028480358684358019, 0.64112511671335204), (0.031992671377973847, 0.64112511671335204), (0.035938136638046278, 0.64112511671335204), (0.040370172585965536, 0.64112511671335204), (0.045348785081285821, 0.64112511671335204), (0.050941380148163802, 0.64112511671335204), (0.057223676593502172, 0.64112511671335204), (0.064280731172843192, 0.64112511671335204), (0.072208090183854642, 0.64112511671335204), (0.081113083078968723, 0.64112511671335204), (0.091116275611548919, 0.64112511671335204), (0.10235310218990264, 0.64112511671335204), (0.11497569953977356, 0.64112511671335204), (0.12915496650148839, 0.64112511671335204), (0.14508287784959395, 0.64112511671335204), (0.16297508346206444, 0.64112511671335204), (0.18307382802953678, 0.64112511671335204), (0.20565123083486514, 0.64112511671335204), (0.23101297000831592, 0.64112511671335204), (0.25950242113997357, 0.64406629318394026), (0.29150530628251758, 0.65264239028944915), (0.32745491628777285, 0.65836134453781514), (0.36783797718286326, 0.68401493930905699), (0.41320124001153363, 0.75836134453781523), (0.46415888336127797, 0.80989729225023344), (0.52140082879996841, 0.84102240896358538), (0.58570208180566674, 0.87549953314659201), (0.65793322465756787, 0.87827731092436978), (0.73907220335257795, 0.88677404295051354), (0.83021756813197434, 0.87549953314659201), (0.93260334688321989, 0.86381886087768434), (1.0476157527896652, 0.86676003734827256), (1.1768119524349978, 0.8639822595704949), (1.3219411484660286, 0.86692343604108313), (1.4849682622544651, 0.86692343604108313), (1.6681005372000592, 0.86986461251167135), (1.873817422860383, 0.87542016806722689), (2.1049041445120196, 0.87819794584500477), (2.364489412645407, 0.86692343604108313), (2.6560877829466869, 0.8754995331465919), (2.9836472402833403, 0.87844070961718013), (3.3516026509388408, 0.87860410830999069), (3.7649358067924674, 0.88138188608776846), (4.2292428743894988, 0.88432306255835669), (4.7508101621027983, 0.89004201680672268), (5.3366992312063068, 0.90155929038281979), (5.9948425031894086, 0.90155929038281979), (6.7341506577508214, 0.90433706816059767), (7.5646332755462904, 0.90719421101774045), (8.4975343590864387, 0.90719421101774045), (9.5454845666183381, 0.90997198879551822), (10.722672220103231, 0.90997198879551822), (12.045035402587823, 0.90425303454715222), (13.530477745798061, 0.90703081232492999), (15.199110829529332, 0.90719421101774045), (17.073526474706906, 0.90719421101774045), (19.179102616724887, 0.90719421101774045), (21.544346900318846, 0.90139589169000944), (24.20128264794381, 0.90433706816059767), (27.1858824273294, 0.90711484593837532), (30.538555088334157, 0.90433706816059767), (34.304692863149192, 0.90155929038281979), (38.535285937105272, 0.90155929038281979), (43.287612810830574, 0.90433706816059767), (48.626015800653533, 0.89878151260504213), (54.622772176843426, 0.90155929038281979), (61.359072734131693, 0.91283380018674143), (68.926121043496948, 0.91283380018674143), (77.426368268112697, 0.91283380018674143), (86.974900261778345, 0.91838935574229696), (97.700995729922468, 0.91838935574229696), (109.74987654930568, 0.91838935574229696), (123.28467394420659, 0.92116713352007462), (138.48863713938718, 0.91830999066293173), (155.56761439304722, 0.91830999066293173), (174.75284000076829, 0.91553221288515407), (196.30406500402725, 0.91275443510737619), (220.51307399030458, 0.91283380018674143), (247.70763559917089, 0.91283380018674143), (278.2559402207126, 0.91005602240896355), (312.57158496882352, 0.90711484593837532), (351.11917342151276, 0.90711484593837532), (394.42060594376562, 0.90711484593837532), (443.06214575838777, 0.90711484593837532), (497.70235643321138, 0.90711484593837532), (559.0810182512223, 0.90433706816059767), (628.02914418342471, 0.90155929038281979), (705.48023107186452, 0.89306255835667603), (792.48289835391699, 0.89020541549953314), (890.21508544503922, 0.89298319327731102), (1000.0, 0.88415966386554623)])
+OrderedDict([(1, 0.85589169000933707), (2, 0.89821195144724564), (3, 0.86381886087768434), (4, 0.68695611577964522), (5, 0.64700746965452849), (6, 0.64994864612511682), (7, 0.64994864612511682), (8, 0.64994864612511682), (9, 0.6470074696545286), (10, 0.6470074696545286), (11, 0.6470074696545286), (12, 0.6470074696545286), (13, 0.64406629318394026), (14, 0.64684407096171803), (15, 0.64684407096171803), (16, 0.64684407096171803), (17, 0.64684407096171803), (18, 0.64684407096171803), (19, 0.64684407096171803), (20, 0.64684407096171803), (21, 0.64684407096171803), (22, 0.64684407096171803), (23, 0.64684407096171803), (24, 0.64684407096171803), (25, 0.64684407096171803), (26, 0.64684407096171803), (27, 0.64684407096171803), (28, 0.64390289449112981), (29, 0.64390289449112981), (30, 0.64390289449112981), (31, 0.64390289449112981), (32, 0.64390289449112981), (33, 0.64390289449112981), (34, 0.64390289449112981), (35, 0.64390289449112981), (36, 0.64390289449112981), (37, 0.64390289449112981), (38, 0.64390289449112981), (39, 0.64390289449112981), (40, 0.64390289449112981), (41, 0.64390289449112981), (42, 0.64390289449112981), (43, 0.64390289449112981), (44, 0.64390289449112981), (45, 0.64390289449112981), (46, 0.64390289449112981), (47, 0.64390289449112981), (48, 0.64390289449112981), (49, 0.64390289449112981), (50, 0.64390289449112981), (51, 0.64390289449112981), (52, 0.64390289449112981), (53, 0.64390289449112981), (54, 0.64390289449112981), (55, 0.64390289449112981), (56, 0.64390289449112981), (57, 0.64390289449112981), (58, 0.64390289449112981), (59, 0.64390289449112981), (60, 0.64390289449112981), (61, 0.64390289449112981), (62, 0.64390289449112981), (63, 0.64390289449112981), (64, 0.64390289449112981), (65, 0.64390289449112981), (66, 0.64390289449112981), (67, 0.64390289449112981), (68, 0.64390289449112981), (69, 0.64390289449112981), (70, 0.64390289449112981), (71, 0.64390289449112981), (72, 0.64390289449112981), (73, 0.64390289449112981), (74, 0.64390289449112981), (75, 0.64390289449112981), (76, 0.64390289449112981), (77, 0.64390289449112981), (78, 0.64390289449112981), (79, 0.64390289449112981), (80, 0.64390289449112981), (81, 0.64390289449112981), (82, 0.64390289449112981), (83, 0.64390289449112981), (84, 0.64390289449112981), (85, 0.64390289449112981), (86, 0.64390289449112981), (87, 0.64390289449112981), (88, 0.64390289449112981), (89, 0.64390289449112981), (90, 0.64390289449112981), (91, 0.64390289449112981), (92, 0.64390289449112981), (93, 0.64390289449112981), (94, 0.64390289449112981), (95, 0.64390289449112981), (96, 0.64390289449112981), (97, 0.64390289449112981), (98, 0.64390289449112981), (99, 0.64390289449112981)])
+OrderedDict([(0.01, 0.64112511671335204), (0.010974987654930561, 0.64112511671335204), (0.012045035402587823, 0.64112511671335204), (0.013219411484660288, 0.64112511671335204), (0.014508287784959394, 0.64112511671335204), (0.015922827933410922, 0.64112511671335204), (0.017475284000076838, 0.64112511671335204), (0.019179102616724886, 0.64112511671335204), (0.021049041445120209, 0.64112511671335204), (0.023101297000831605, 0.64112511671335204), (0.025353644939701114, 0.64112511671335204), (0.027825594022071243, 0.64112511671335204), (0.030538555088334154, 0.64112511671335204), (0.033516026509388425, 0.64970121381886092), (0.03678379771828634, 0.68156395891690003), (0.040370172585965536, 0.82942110177404305), (0.044306214575838825, 0.87844070961718024), (0.048626015800653531, 0.86692343604108313), (0.0533669923120631, 0.8639822595704949), (0.058570208180566671, 0.86692343604108313), (0.06428073117284322, 0.87264239028944901), (0.070548023107186456, 0.8754995331465919), (0.077426368268112694, 0.87860410830999069), (0.084975343590864463, 0.88726423902894491), (0.093260334688321997, 0.90155929038281979), (0.10235310218990264, 0.90719421101774045), (0.11233240329780277, 0.90703081232492999), (0.12328467394420665, 0.90703081232492999), (0.13530477745798075, 0.90719421101774045), (0.14849682622544649, 0.90433706816059767), (0.16297508346206444, 0.90155929038281979), (0.1788649529057435, 0.90433706816059767), (0.19630406500402714, 0.91005602240896355), (0.21544346900318845, 0.91283380018674143), (0.23644894126454083, 0.91838935574229696), (0.25950242113997374, 0.91830999066293173), (0.2848035868435802, 0.91553221288515407), (0.3125715849688237, 0.91283380018674143), (0.34304692863149194, 0.91005602240896355), (0.37649358067924693, 0.90711484593837532), (0.41320124001153385, 0.90711484593837532), (0.45348785081285842, 0.89306255835667603), (0.49770235643321115, 0.89004201680672279), (0.54622772176843426, 0.88130252100840334), (0.59948425031894115, 0.86725023342670404), (0.65793322465756821, 0.85899626517273586), (0.72208090183854678, 0.85017273576097119), (0.79248289835391772, 0.83906162464986012), (0.86974900261778343, 0.8416760037348272), (0.95454845666183419, 0.84445378151260508), (1.0476157527896652, 0.83612044817927167), (1.1497569953977369, 0.83080765639589171), (1.2618568830660211, 0.83914098972922502), (1.3848863713938731, 0.83914098972922491), (1.5199110829529348, 0.83906162464985989), (1.6681005372000592, 0.83906162464985989), (1.8307382802953698, 0.83906162464985989), (2.0092330025650478, 0.83906162464985989), (2.2051307399030455, 0.83906162464985989), (2.4201282647943834, 0.83906162464985989), (2.6560877829466869, 0.83906162464985989), (2.9150530628251787, 0.83906162464985989), (3.1992671377973845, 0.83906162464985989), (3.5111917342151346, 0.83906162464985989), (3.8535285937105312, 0.83906162464985989), (4.2292428743894988, 0.83906162464985989), (4.641588833612782, 0.83906162464985989), (5.0941380148163802, 0.83906162464985989), (5.5908101825122287, 0.83906162464985989), (6.1359072734131761, 0.83906162464985989), (6.7341506577508286, 0.83906162464985989), (7.3907220335257824, 0.83906162464985989), (8.1113083078968717, 0.83906162464985989), (8.902150854450392, 0.83906162464985989), (9.7700995729922564, 0.83906162464985989), (10.722672220103243, 0.83906162464985989), (11.768119524349991, 0.83906162464985989), (12.915496650148841, 0.83906162464985989), (14.174741629268063, 0.83906162464985989), (15.556761439304722, 0.83906162464985989), (17.07352647470692, 0.83906162464985989), (18.73817422860385, 0.83906162464985989), (20.565123083486537, 0.83906162464985989), (22.570197196339215, 0.83906162464985989), (24.770763559917114, 0.83906162464985989), (27.185882427329428, 0.83906162464985989), (29.836472402833405, 0.83906162464985989), (32.745491628777316, 0.83906162464985989), (35.938136638046295, 0.83906162464985989), (39.442060594376599, 0.83906162464985989), (43.287612810830616, 0.83906162464985989), (47.508101621027983, 0.83906162464985989), (52.140082879996896, 0.83906162464985989), (57.223676593502205, 0.83906162464985989), (62.802914418342596, 0.83906162464985989), (68.92612104349702, 0.83906162464985989), (75.646332755462907, 0.83906162464985989), (83.021756813197527, 0.83906162464985989), (91.116275611548957, 0.83906162464985989), (100.0, 0.83906162464985989)])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{svm} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scale}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{r\PYZus{}c}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{r\PYZus{}gamma}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         \PY{n}{r\PYZus{}degree}\PY{o}{=}\PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}svm.fit(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             \PY{c+c1}{\PYZsh{}r\PYZus{}c[key] = svm.score(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             
+             \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{svm}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{r\PYZus{}c}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{scores}\PY{p}{)}
+         
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{}svm.fit(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             \PY{c+c1}{\PYZsh{}r\PYZus{}degree[key] = svm.score(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             
+             \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{svm}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{r\PYZus{}degree}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{scores}\PY{p}{)}
+             
+         \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}    
+             
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{svm}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{gamma}\PY{o}{=}\PY{n}{key}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{}svm.fit(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             \PY{c+c1}{\PYZsh{}r\PYZus{}gamma[key] = svm.score(data.iloc[:,:34], data[\PYZdq{}label\PYZdq{}])}
+             
+             \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{svm}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{34}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{r\PYZus{}gamma}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{scores}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{r\PYZus{}c}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{r\PYZus{}degree}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{r\PYZus{}gamma}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+OrderedDict([(0.01, 0.64112511671335204), (0.011233240329780276, 0.64112511671335204), (0.012618568830660204, 0.64112511671335204), (0.014174741629268055, 0.64112511671335204), (0.015922827933410922, 0.64112511671335204), (0.017886495290574352, 0.64112511671335204), (0.02009233002565047, 0.64112511671335204), (0.022570197196339202, 0.64112511671335204), (0.025353644939701114, 0.64112511671335204), (0.028480358684358019, 0.64112511671335204), (0.031992671377973847, 0.64112511671335204), (0.035938136638046278, 0.64112511671335204), (0.040370172585965536, 0.64112511671335204), (0.045348785081285821, 0.64112511671335204), (0.050941380148163802, 0.64406629318394026), (0.057223676593502172, 0.68123716153127922), (0.064280731172843192, 0.71857142857142853), (0.072208090183854642, 0.75811391223155922), (0.081113083078968723, 0.80402894491129773), (0.091116275611548919, 0.84961251167133534), (0.10235310218990264, 0.87501867413632117), (0.11497569953977356, 0.88964052287581696), (0.12915496650148839, 0.90385154061624662), (0.14508287784959395, 0.9067086834733894), (0.16297508346206444, 0.91520541549953316), (0.18307382802953678, 0.92100373482726428), (0.20565123083486514, 0.92655929038281981), (0.23101297000831592, 0.93227824463118592), (0.25950242113997357, 0.93505602240896368), (0.29150530628251758, 0.93505602240896368), (0.32745491628777285, 0.93505602240896368), (0.36783797718286326, 0.93505602240896368), (0.41320124001153363, 0.93505602240896368), (0.46415888336127797, 0.93505602240896368), (0.52140082879996841, 0.93505602240896368), (0.58570208180566674, 0.93505602240896368), (0.65793322465756787, 0.93783380018674145), (0.73907220335257795, 0.93783380018674145), (0.83021756813197434, 0.93783380018674145), (0.93260334688321989, 0.93505602240896368), (1.0476157527896652, 0.93783380018674145), (1.1768119524349978, 0.94061157796451911), (1.3219411484660286, 0.94061157796451911), (1.4849682622544651, 0.94061157796451911), (1.6681005372000592, 0.94061157796451911), (1.873817422860383, 0.94061157796451911), (2.1049041445120196, 0.94077497665732968), (2.364489412645407, 0.94077497665732968), (2.6560877829466869, 0.94633053221288521), (2.9836472402833403, 0.94918767507002799), (3.3516026509388408, 0.94918767507002799), (3.7649358067924674, 0.94918767507002799), (4.2292428743894988, 0.95196545284780587), (4.7508101621027983, 0.95196545284780587), (5.3366992312063068, 0.95196545284780587), (5.9948425031894086, 0.95196545284780587), (6.7341506577508214, 0.95474323062558353), (7.5646332755462904, 0.95196545284780587), (8.4975343590864387, 0.95196545284780587), (9.5454845666183381, 0.95474323062558353), (10.722672220103231, 0.95474323062558353), (12.045035402587823, 0.95474323062558353), (13.530477745798061, 0.95474323062558353), (15.199110829529332, 0.95474323062558353), (17.073526474706906, 0.95474323062558353), (19.179102616724887, 0.95196545284780587), (21.544346900318846, 0.95196545284780587), (24.20128264794381, 0.95196545284780587), (27.1858824273294, 0.94918767507002799), (30.538555088334157, 0.9408543417366948), (34.304692863149192, 0.93791316526610635), (38.535285937105272, 0.94069094304388423), (43.287612810830574, 0.93774976657329601), (48.626015800653533, 0.93774976657329601), (54.622772176843426, 0.94069094304388423), (61.359072734131693, 0.93774976657329601), (68.926121043496948, 0.9320308123249299), (77.426368268112697, 0.9262324929971989), (86.974900261778345, 0.92901027077497678), (97.700995729922468, 0.931951447245565), (109.74987654930568, 0.92917366946778712), (123.28467394420659, 0.92917366946778712), (138.48863713938718, 0.9320308123249299), (155.56761439304722, 0.92925303454715225), (174.75284000076829, 0.92925303454715225), (196.30406500402725, 0.92925303454715225), (220.51307399030458, 0.92647525676937437), (247.70763559917089, 0.92647525676937437), (278.2559402207126, 0.92647525676937437), (312.57158496882352, 0.92925303454715225), (351.11917342151276, 0.92925303454715213), (394.42060594376562, 0.92631185807656391), (443.06214575838777, 0.92353408029878614), (497.70235643321138, 0.91781512605042015), (559.0810182512223, 0.91487394957983192), (628.02914418342471, 0.91176937441643324), (705.48023107186452, 0.90899159663865547), (792.48289835391699, 0.90899159663865547), (890.21508544503922, 0.90899159663865547), (1000.0, 0.90899159663865547)])
+OrderedDict([(1, 0.94061157796451911), (2, 0.94061157796451911), (3, 0.94061157796451911), (4, 0.94061157796451911), (5, 0.94061157796451911), (6, 0.94061157796451911), (7, 0.94061157796451911), (8, 0.94061157796451911), (9, 0.94061157796451911), (10, 0.94061157796451911), (11, 0.94061157796451911), (12, 0.94061157796451911), (13, 0.94061157796451911), (14, 0.94061157796451911), (15, 0.94061157796451911), (16, 0.94061157796451911), (17, 0.94061157796451911), (18, 0.94061157796451911), (19, 0.94061157796451911), (20, 0.94061157796451911), (21, 0.94061157796451911), (22, 0.94061157796451911), (23, 0.94061157796451911), (24, 0.94061157796451911), (25, 0.94061157796451911), (26, 0.94061157796451911), (27, 0.94061157796451911), (28, 0.94061157796451911), (29, 0.94061157796451911), (30, 0.94061157796451911), (31, 0.94061157796451911), (32, 0.94061157796451911), (33, 0.94061157796451911), (34, 0.94061157796451911), (35, 0.94061157796451911), (36, 0.94061157796451911), (37, 0.94061157796451911), (38, 0.94061157796451911), (39, 0.94061157796451911), (40, 0.94061157796451911), (41, 0.94061157796451911), (42, 0.94061157796451911), (43, 0.94061157796451911), (44, 0.94061157796451911), (45, 0.94061157796451911), (46, 0.94061157796451911), (47, 0.94061157796451911), (48, 0.94061157796451911), (49, 0.94061157796451911), (50, 0.94061157796451911), (51, 0.94061157796451911), (52, 0.94061157796451911), (53, 0.94061157796451911), (54, 0.94061157796451911), (55, 0.94061157796451911), (56, 0.94061157796451911), (57, 0.94061157796451911), (58, 0.94061157796451911), (59, 0.94061157796451911), (60, 0.94061157796451911), (61, 0.94061157796451911), (62, 0.94061157796451911), (63, 0.94061157796451911), (64, 0.94061157796451911), (65, 0.94061157796451911), (66, 0.94061157796451911), (67, 0.94061157796451911), (68, 0.94061157796451911), (69, 0.94061157796451911), (70, 0.94061157796451911), (71, 0.94061157796451911), (72, 0.94061157796451911), (73, 0.94061157796451911), (74, 0.94061157796451911), (75, 0.94061157796451911), (76, 0.94061157796451911), (77, 0.94061157796451911), (78, 0.94061157796451911), (79, 0.94061157796451911), (80, 0.94061157796451911), (81, 0.94061157796451911), (82, 0.94061157796451911), (83, 0.94061157796451911), (84, 0.94061157796451911), (85, 0.94061157796451911), (86, 0.94061157796451911), (87, 0.94061157796451911), (88, 0.94061157796451911), (89, 0.94061157796451911), (90, 0.94061157796451911), (91, 0.94061157796451911), (92, 0.94061157796451911), (93, 0.94061157796451911), (94, 0.94061157796451911), (95, 0.94061157796451911), (96, 0.94061157796451911), (97, 0.94061157796451911), (98, 0.94061157796451911), (99, 0.94061157796451911)])
+OrderedDict([(0.01, 0.88415966386554623), (0.010974987654930561, 0.88415966386554623), (0.012045035402587823, 0.89249299719887953), (0.013219411484660288, 0.89249299719887953), (0.014508287784959394, 0.89821195144724564), (0.015922827933410922, 0.89543417366946776), (0.017475284000076838, 0.89821195144724564), (0.019179102616724886, 0.90948646125116728), (0.021049041445120209, 0.91226423902894493), (0.023101297000831605, 0.9178991596638657), (0.025353644939701114, 0.91512138188608783), (0.027825594022071243, 0.93489262371615323), (0.030538555088334154, 0.93783380018674145), (0.033516026509388425, 0.93783380018674145), (0.03678379771828634, 0.93505602240896368), (0.040370172585965536, 0.93783380018674145), (0.044306214575838825, 0.93783380018674145), (0.048626015800653531, 0.93505602240896368), (0.0533669923120631, 0.93783380018674145), (0.058570208180566671, 0.93783380018674145), (0.06428073117284322, 0.93783380018674145), (0.070548023107186456, 0.93783380018674145), (0.077426368268112694, 0.93783380018674145), (0.084975343590864463, 0.93783380018674145), (0.093260334688321997, 0.94069094304388423), (0.10235310218990264, 0.94363211951447246), (0.11233240329780277, 0.94363211951447246), (0.12328467394420665, 0.94640989729225011), (0.13530477745798075, 0.94918767507002799), (0.14849682622544649, 0.94918767507002799), (0.16297508346206444, 0.95196545284780587), (0.1788649529057435, 0.94640989729225011), (0.19630406500402714, 0.94363211951447246), (0.21544346900318845, 0.9408543417366948), (0.23644894126454083, 0.93807656395891692), (0.25950242113997374, 0.93807656395891692), (0.2848035868435802, 0.94640989729225011), (0.3125715849688237, 0.9408543417366948), (0.34304692863149194, 0.94648926237161535), (0.37649358067924693, 0.94943043884220357), (0.41320124001153385, 0.94665266106442592), (0.45348785081285842, 0.94093370681605981), (0.49770235643321115, 0.94077030812324947), (0.54622772176843426, 0.93521475256769393), (0.59948425031894115, 0.93243697478991605), (0.65793322465756821, 0.92965919701213817), (0.72208090183854678, 0.92688141923436052), (0.79248289835391772, 0.92124649859943974), (0.86974900261778343, 0.92402427637721751), (0.95454845666183419, 0.92680205415499528), (1.0476157527896652, 0.92124649859943974), (1.1497569953977369, 0.90956582633053229), (1.2618568830660211, 0.90139589169000944), (1.3848863713938731, 0.89281979458450045), (1.5199110829529348, 0.89281979458450045), (1.6681005372000592, 0.88726423902894491), (1.8307382802953698, 0.88154528478057892), (2.0092330025650478, 0.87598972922502338), (2.2051307399030455, 0.87027077497665728), (2.4201282647943834, 0.86749299719887962), (2.6560877829466869, 0.86749299719887962), (2.9150530628251787, 0.86471521942110174), (3.1992671377973845, 0.87043417366946785), (3.5111917342151346, 0.86422502334267048), (3.8535285937105312, 0.69781512605042018), (4.2292428743894988, 0.66709617180205416), (4.641588833612782, 0.66709617180205416), (5.0941380148163802, 0.66709617180205416), (5.5908101825122287, 0.66423902894491138), (6.1359072734131761, 0.66423902894491138), (6.7341506577508286, 0.66129785247432316), (7.3907220335257824, 0.65835667600373493), (8.1113083078968717, 0.65835667600373493), (8.902150854450392, 0.65835667600373493), (9.7700995729922564, 0.65835667600373493), (10.722672220103243, 0.65835667600373493), (11.768119524349991, 0.65835667600373493), (12.915496650148841, 0.65835667600373493), (14.174741629268063, 0.65549953314659204), (15.556761439304722, 0.65264239028944915), (17.07352647470692, 0.65264239028944915), (18.73817422860385, 0.65264239028944915), (20.565123083486537, 0.65264239028944915), (22.570197196339215, 0.65264239028944915), (24.770763559917114, 0.65264239028944915), (27.185882427329428, 0.64978524743230626), (29.836472402833405, 0.64978524743230626), (32.745491628777316, 0.64978524743230626), (35.938136638046295, 0.64684407096171803), (39.442060594376599, 0.64684407096171803), (43.287612810830616, 0.64684407096171803), (47.508101621027983, 0.64684407096171803), (52.140082879996896, 0.64684407096171803), (57.223676593502205, 0.64684407096171803), (62.802914418342596, 0.64684407096171803), (68.92612104349702, 0.64684407096171803), (75.646332755462907, 0.64684407096171803), (83.021756813197527, 0.64684407096171803), (91.116275611548957, 0.64684407096171803), (100.0, 0.64684407096171803)])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{c\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{p}{[}\PY{n}{l\PYZus{}c}\PY{p}{,}\PY{n}{p\PYZus{}c}\PY{p}{,}\PY{n}{r\PYZus{}c}\PY{p}{]}\PY{p}{,}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Polynomial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Radial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{c\PYZus{}data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:}             0.010000     0.011233     0.012619     0.014175     0.015923     \textbackslash{}
+         Linear         0.844374     0.852871     0.852871     0.850093     0.850257   
+         Polynomial     0.641125     0.641125     0.641125     0.641125     0.641125   
+         Radial         0.641125     0.641125     0.641125     0.641125     0.641125   
+         
+                     0.017886     0.020092     0.022570     0.025354     0.028480     \textbackslash{}
+         Linear         0.850257     0.847479     0.847479     0.850093     0.852951   
+         Polynomial     0.641125     0.641125     0.641125     0.641125     0.641125   
+         Radial         0.641125     0.641125     0.641125     0.641125     0.641125   
+         
+                        {\ldots}       351.119173   394.420606   443.062146   497.702356   \textbackslash{}
+         Linear         {\ldots}          0.878683     0.881625     0.884402     0.884402   
+         Polynomial     {\ldots}          0.907115     0.907115     0.907115     0.907115   
+         Radial         {\ldots}          0.929253     0.926312     0.923534     0.917815   
+         
+                     559.081018   628.029144   705.480231   792.482898   890.215085   \textbackslash{}
+         Linear         0.884402     0.884402     0.884402     0.884402     0.884402   
+         Polynomial     0.904337     0.901559     0.893063     0.890205     0.892983   
+         Radial         0.914874     0.911769     0.908992     0.908992     0.908992   
+         
+                     1000.000000  
+         Linear         0.887260  
+         Polynomial     0.884160  
+         Radial         0.908992  
+         
+         [3 rows x 100 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{gamma\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{p}{[}\PY{n}{l\PYZus{}gamma}\PY{p}{,}\PY{n}{p\PYZus{}gamma}\PY{p}{,}\PY{n}{r\PYZus{}gamma}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Polynomial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Radial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{gamma\PYZus{}data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:}             0.010000    0.010975    0.012045    0.013219    0.014508    \textbackslash{}
+         Linear        0.878361    0.878361    0.878361    0.878361    0.878361   
+         Polynomial    0.641125    0.641125    0.641125    0.641125    0.641125   
+         Radial        0.884160    0.884160    0.892493    0.892493    0.898212   
+         
+                     0.015923    0.017475    0.019179    0.021049    0.023101    \textbackslash{}
+         Linear        0.878361    0.878361    0.878361    0.878361    0.878361   
+         Polynomial    0.641125    0.641125    0.641125    0.641125    0.641125   
+         Radial        0.895434    0.898212    0.909486    0.912264    0.917899   
+         
+                        {\ldots}      43.287613   47.508102   52.140083   57.223677   \textbackslash{}
+         Linear         {\ldots}        0.878361    0.878361    0.878361    0.878361   
+         Polynomial     {\ldots}        0.839062    0.839062    0.839062    0.839062   
+         Radial         {\ldots}        0.646844    0.646844    0.646844    0.646844   
+         
+                     62.802914   68.926121   75.646333   83.021757   91.116276   \textbackslash{}
+         Linear        0.878361    0.878361    0.878361    0.878361    0.878361   
+         Polynomial    0.839062    0.839062    0.839062    0.839062    0.839062   
+         Radial        0.646844    0.646844    0.646844    0.646844    0.646844   
+         
+                     100.000000  
+         Linear        0.878361  
+         Polynomial    0.839062  
+         Radial        0.646844  
+         
+         [3 rows x 100 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{degree\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{p}{[}\PY{n}{l\PYZus{}degree}\PY{p}{,}\PY{n}{p\PYZus{}degree}\PY{p}{,}\PY{n}{r\PYZus{}degree}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Polynomial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Radial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{degree\PYZus{}data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}                   1         2         3         4         5         6   \textbackslash{}
+         Linear      0.878361  0.878361  0.878361  0.878361  0.878361  0.878361   
+         Polynomial  0.855892  0.898212  0.863819  0.686956  0.647007  0.649949   
+         Radial      0.940612  0.940612  0.940612  0.940612  0.940612  0.940612   
+         
+                           7         8         9         10    {\ldots}           90  \textbackslash{}
+         Linear      0.878361  0.878361  0.878361  0.878361    {\ldots}     0.878361   
+         Polynomial  0.649949  0.649949  0.647007  0.647007    {\ldots}     0.643903   
+         Radial      0.940612  0.940612  0.940612  0.940612    {\ldots}     0.940612   
+         
+                           91        92        93        94        95        96  \textbackslash{}
+         Linear      0.878361  0.878361  0.878361  0.878361  0.878361  0.878361   
+         Polynomial  0.643903  0.643903  0.643903  0.643903  0.643903  0.643903   
+         Radial      0.940612  0.940612  0.940612  0.940612  0.940612  0.940612   
+         
+                           97        98        99  
+         Linear      0.878361  0.878361  0.878361  
+         Polynomial  0.643903  0.643903  0.643903  
+         Radial      0.940612  0.940612  0.940612  
+         
+         [3 rows x 99 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{results} \PY{o}{=} \PY{n}{c\PYZus{}data}\PY{o}{.}\PY{n}{T}
+         
+         \PY{c+c1}{\PYZsh{}Plot the results}
+         \PY{n}{plot} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVM Kernal Performance Over Varying C Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Display plot in Jupyter}
+         \PY{n}{plot}
+         
+         \PY{n}{results} \PY{o}{=} \PY{n}{degree\PYZus{}data}\PY{o}{.}\PY{n}{T}
+         \PY{c+c1}{\PYZsh{}Plot the results}
+         \PY{n}{plot} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVM Kernal Performance Over Varying Degree Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Degree}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Display plot in Jupyter}
+         \PY{n}{plot}
+         
+         \PY{n}{results} \PY{o}{=} \PY{n}{gamma\PYZus{}data}\PY{o}{.}\PY{n}{T}
+         \PY{c+c1}{\PYZsh{}Plot the results}
+         \PY{n}{plot} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVM Kernal Performance Over Varying Gamma Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gamma}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Display plot in Jupyter}
+         \PY{n}{plot}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x21e895ec7b8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
