@@ -83,7 +83,7 @@ requests==2.18.2
 reverse-engineer==1.1
 reverse-geocode==1.0
 reverse-geocoder==1.5.1
-rsa==3.4.2
+rsa==4.1
 scattertext==0.0.2.25
 scikit-learn==0.20.2
 scipy==0.19.1
